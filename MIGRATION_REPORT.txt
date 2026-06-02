@@ -1,0 +1,48 @@
+# Minecraft 1.16.5 → 1.20.1 (Forge) 迁移报告
+Project: ArtisanWorktables
+
+## 迁移状态：已完成
+
+`gradlew build` 全流程通过（compileJava / processResources / Mixin 注入 / jar / reobf），0 错误 0 警告。
+
+### 核心模组（128 个 Java 文件）
+包名、类名、方法名等批量迁移见下方“历史变更”，最终修复的 28 个编译错误归类：
+
+- Recipe API：canFit → canCraftInDimensions；基类补实现 assemble(C, RegistryAccess)；getRecipeOutput → getResultItem
+- ToolEntry：getDamageValue() → getDamage()
+- Ingredient：write → toNetwork；hasNoMatchingItems → isEmpty；getMatchingStacks → getItems
+- ItemStack：isItemEqual + areItemStackTagsEqual → isSameItemSameTags
+- NonNullList：from(...) → of(...)
+- FriendlyByteBuf：readCompoundTag/writeCompoundTag → readNbt/writeNbt
+- BlockEntity：getPos() → getBlockPos()
+- Player：openContainer → containerMenu
+- EntityBlock：BaseBlock 补 implements EntityBlock，使子类 newBlockEntity 正确 override
+- GUI：IBlockEntityDesigner.asTileEntity → getTileEntity；物品渲染改用 athenaeum GuiContainerBase.drawItemStack(GuiGraphics,...)
+- 掉落：withDynamicDrop lambda 改为单参 Consumer<ItemStack>（1.20.1 DynamicDrop 签名）
+
+### JEI 集成（7 个文件，JEI 7.x → 15.20.x）
+- IRecipeCategory：getUid/getRecipeClass → getRecipeType(JEI RecipeType)；getTitle 返回 Component
+- 槽位系统：IGuiItemStackGroup/IGuiFluidStackGroup + init/set → IRecipeLayoutBuilder.addSlot(role, x, y) + addItemStacks/addIngredient
+- 合成网格：弃用 ICraftingGridHelper（含自定义 WorkshopCraftingGridHelper，已删除），改为手动建格 + 索引映射，复刻原 3x3 / 5x5 布局
+- 流体：ForgeTypes.FLUID_STACK + setFluidRenderer
+- 绘制：PoseStack → GuiGraphics；Font.drawString/width 新 API
+- 转移：IRecipeTransferInfo<C> → IRecipeTransferInfo<C, R>；container.inventorySlots → slots
+- 角色对齐：仅合成格 + 工具用 INPUT（与 getRecipeSlots 对齐避免转移报错），流体/副产物用 CATALYST
+- block.getRegistryName() → ForgeRegistries.BLOCKS.getKey()
+- RecipeManager.getRecipesForType → getAllRecipesFor
+- build.gradle 补充 jei-1.20.1-common-api 依赖
+
+### CraftTweaker 集成（4 个文件，CT 7.x → 14.0.60）
+- 包路径：api.annotations → api.annotation；api.item.IIngredient → api.ingredient.IIngredient
+- 配方添加：移除 CTCraftingTableManager 内部反射，改用 ActionAddRecipe + 轻量 IRecipeManager<ArtisanRecipe>（lambda 实现 getRecipeType）
+- 日志：CraftTweakerAPI.logWarning/logError → CraftTweakerAPI.getLogger()(log4j)
+- 运行去重：LoaderActions.getRunCount() → IScriptRunManager.currentRunInfo() 对象身份检测
+- describe：MCItemStackMutable → ItemStackUtil
+
+### mods.toml
+补充 jei、crafttweaker 可选依赖（mandatory=false, ordering=AFTER）。
+
+---
+## 历史变更（核心包/类/方法重命名）
+（见 git 历史；net.minecraft.* 包重构、TileEntity→BlockEntity、Container→Menu、
+World→Level、ITextComponent→Component、MatrixStack→PoseStack 等已全部完成）
