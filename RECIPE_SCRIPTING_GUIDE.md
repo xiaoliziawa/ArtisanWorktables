@@ -261,7 +261,111 @@ ServerEvents.recipes(event => {
 
 ---
 
-## 五、常见问题
+## 五、标签（Tag）支持
+
+**输入类**字段支持物品标签（tag），**输出类与流体不支持**。
+
+| 位置 | 能否用 tag |
+|------|-----------|
+| 主材料（shaped 的 `key` / shapeless 的 `ingredients`） | ✅ 支持 |
+| 副材料 `secondaryIngredients` | ✅ 支持 |
+| 工具 `tools` | ✅ 支持 |
+| 主输出 `result` | ❌ 必须为具体物品 |
+| 额外产出 `extraOutput` | ❌ 必须为具体物品 |
+| 流体 `fluidIngredient` | ❌ 必须为具体流体 id |
+
+> 本模组运行于 **1.20.1 Forge**，物品标签命名空间用 `forge:`（如 `forge:ingots/iron`），不是 1.21+ 的 `c:`。
+
+### 5.1 CraftTweaker
+
+CrT 使用 `<tag:items:...>`，可直接作为材料/工具，并支持 `* 数量`：
+
+```zenscript
+Recipe.type(Type.BLACKSMITH)
+    .shaped([
+        [<tag:items:forge:ingots/iron>, <tag:items:forge:ingots/iron>],
+        [<tag:items:forge:ingots/iron>, <tag:items:forge:ingots/iron>]
+    ])
+    .tool(<tag:items:minecraft:pickaxes>, 1)            // 工具用 tag
+    .secondary([<tag:items:forge:gems/diamond>], false)  // 副材料用 tag
+    .output(<item:minecraft:anvil>)                      // 输出仍为具体物品
+    .register("blacksmith_anvil_tag");
+```
+
+### 5.2 KubeJS
+
+`key` / `ingredients` / `secondaryIngredients` 用 `'#命名空间:路径'`；`tools` 因走原生 JSON 透传，用 `{ tag: '命名空间:路径' }`（**不带 `#`**）：
+
+```js
+event.recipes.artisanworktables.blacksmith_shaped(
+  'minecraft:anvil',
+  ['II', 'II'],
+  { I: '#forge:ingots/iron' }                            // key 用 tag
+)
+  .tools([{ tag: 'minecraft:pickaxes', damage: 1 }])   // 工具 tag：用 tag 字段，不加 #
+  .secondaryIngredients(['#forge:gems/diamond'])         // 副材料用 tag
+  .consumeSecondaryIngredients(false)
+
+event.recipes.artisanworktables.basic_shapeless(
+  Item.of('minecraft:stick', 4),
+  ['#minecraft:logs']                                    // ingredients 用 tag
+)
+```
+
+> **易错点**：KubeJS 中 `tools` 的标签写在 `tag` 字段且**不加 `#`**，与 `ingredients`/`key` 的 `#` 前缀写法不同。
+
+---
+
+## 六、NBT 支持
+
+输入与输出都支持 NBT，但两套脚本的**输入**默认行为相反。
+
+| | 输出（`result` / `extraOutput`） | 输入（`ingredients` / `key` / `secondaryIngredients` / `tools`） |
+|---|---|---|
+| 是否支持 | ✅ | ✅ |
+| 模组层依据 | `CraftingHelper.getItemStack` 读 `nbt` 字段（**禁止 `data`**） | `Ingredient.fromJson` 识别 Forge 的 NBT 匹配类型 |
+
+- **CraftTweaker**：输出用 `<item:...>.withTag({...})`；输入的 `IItemStack` **默认就带 NBT 比对**，`.withTag({...})` 即要求 NBT 一致。
+- **KubeJS**：输出用 `Item.of('id', '{...SNBT...}')`；输入**默认忽略 NBT**，要按 NBT 匹配须显式调 `.strongNBT()`（严格全等）或 `.weakNBT()`（部分匹配）。
+
+> ⚠️ 输入 NBT 默认行为相反：**CrT 默认严格，KubeJS 默认忽略**。这是最易踩的坑。
+
+### 6.1 CraftTweaker（输出一本带锋利 V 的书）
+
+```zenscript
+Recipe.type(Type.MAGE)
+    .shaped([
+        [<item:minecraft:lapis_lazuli>, <item:minecraft:book>, <item:minecraft:lapis_lazuli>],
+        [<item:minecraft:lapis_lazuli>, <item:minecraft:experience_bottle>, <item:minecraft:lapis_lazuli>]
+    ])
+    .level(5)
+    .output(<item:minecraft:enchanted_book>.withTag({StoredEnchantments: [{id: "minecraft:sharpness" as string, lvl: 5 as short}]}))
+    .register("mage_sharpness_book");
+```
+
+### 6.2 KubeJS（输出带附魔的书 / 要求特定 NBT 输入）
+
+```js
+// 输出一本带锋利 V 的附魔书
+event.recipes.artisanworktables.mage_shaped(
+  Item.of('minecraft:enchanted_book', '{StoredEnchantments:[{id:"minecraft:sharpness",lvl:5s}]}'),
+  ['LBL', 'LEL'],
+  { L: 'minecraft:lapis_lazuli', B: 'minecraft:book', E: 'minecraft:experience_bottle' }
+).levelRequired(5)
+
+// 要求“必须放入特定 NBT 物品”作为材料时，须显式 strongNBT（严格）或 weakNBT（部分）
+event.recipes.artisanworktables.basic_shapeless(
+  'minecraft:book',
+  [Item.of('minecraft:enchanted_book', '{StoredEnchantments:[{id:"minecraft:sharpness",lvl:5s}]}').strongNBT()]
+)
+```
+
+> - SNBT 里附魔等级 `lvl` 必须是 **short**：KubeJS 写 `5s`、CrT 写 `5 as short`；写成普通整数会匹配/写入失败。
+> - 输出 NBT 用 `nbt`（KubeJS 自动处理，CrT 用 `.withTag`），**不要用 `data`**（模组会直接报错）。
+
+---
+
+## 七、常见问题
 
 - **配方不生效？** 确认桌型名拼写正确（全小写），且物品/流体 id 存在。可在 JEI 中查看对应桌型分类核对。
 - **工具不被识别？** `tools` 中的 `item`/`tag` 必须是合法材料，`damage` 是单次合成消耗的耐久；并确认该工具在对应工具处理器支持范围内。

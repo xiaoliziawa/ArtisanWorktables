@@ -20,11 +20,18 @@ import java.util.List;
 
 public class CategorySetupHandler {
 
+  private static final int SLOT_OFFSET = 1;
+
   private final EnumTier tier;
 
   public CategorySetupHandler(EnumTier tier) {
 
     this.tier = tier;
+  }
+
+  private IRecipeSlotBuilder slot(IRecipeLayoutBuilder builder, RecipeIngredientRole role, int x, int y) {
+
+    return builder.addSlot(role, x + SLOT_OFFSET, y + SLOT_OFFSET);
   }
 
   public void setup(ArtisanRecipe recipe, IRecipeLayoutBuilder builder) {
@@ -64,7 +71,7 @@ public class CategorySetupHandler {
         // searchable, but excluded from recipe transfer to avoid filling these slots.
 
         if (i + 1 <= secondaryIngredients.size()) {
-          builder.addSlot(RecipeIngredientRole.CATALYST, 4 + (18 * i), yPos)
+          this.slot(builder, RecipeIngredientRole.CATALYST, 4 + (18 * i), yPos)
               .addItemStacks(Arrays.asList(secondaryIngredients.get(i).getItems()));
         }
       }
@@ -80,12 +87,12 @@ public class CategorySetupHandler {
       long capacity = (long) fluidStack.getAmount() * 2;
 
       if (tier == EnumTier.WORKTABLE || tier == EnumTier.WORKSTATION) {
-        builder.addSlot(RecipeIngredientRole.CATALYST, 5, 14)
+        this.slot(builder, RecipeIngredientRole.CATALYST, 5, 14)
             .setFluidRenderer(capacity, false, 6, 52)
             .addIngredient(ForgeTypes.FLUID_STACK, fluidStack);
 
       } else if (tier == EnumTier.WORKSHOP) {
-        builder.addSlot(RecipeIngredientRole.CATALYST, 5, 4)
+        this.slot(builder, RecipeIngredientRole.CATALYST, 5, 4)
             .setFluidRenderer(capacity, false, 6, 88)
             .addIngredient(ForgeTypes.FLUID_STACK, fluidStack);
       }
@@ -100,14 +107,14 @@ public class CategorySetupHandler {
     if (tier == EnumTier.WORKTABLE || tier == EnumTier.WORKSTATION) {
 
       for (int i = 0; i < size; i++) {
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 148, 13 + 18 * i)
+        this.slot(builder, RecipeIngredientRole.OUTPUT, 148, 13 + 18 * i)
             .addItemStack(extraOutputs.get(i).getOutput());
       }
 
     } else if (tier == EnumTier.WORKSHOP) {
 
       for (int i = 0; i < size; i++) {
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 112 + 18 * i, 3)
+        this.slot(builder, RecipeIngredientRole.OUTPUT, 112 + 18 * i, 3)
             .addItemStack(extraOutputs.get(i).getOutput());
       }
     }
@@ -124,31 +131,31 @@ public class CategorySetupHandler {
     if (tier == EnumTier.WORKTABLE) {
 
       if (tools.size() > 0) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 74, 31).addItemStacks(tools.get(0));
+        this.slot(builder, RecipeIngredientRole.INPUT, 74, 31).addItemStacks(tools.get(0));
       }
 
     } else if (tier == EnumTier.WORKSTATION) {
 
       if (tools.size() > 0) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 74, 20).addItemStacks(tools.get(0));
+        this.slot(builder, RecipeIngredientRole.INPUT, 74, 20).addItemStacks(tools.get(0));
       }
 
       if (tools.size() > 1) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 74, 20 + 22).addItemStacks(tools.get(1));
+        this.slot(builder, RecipeIngredientRole.INPUT, 74, 20 + 22).addItemStacks(tools.get(1));
       }
 
     } else if (tier == EnumTier.WORKSHOP) {
 
       if (tools.size() > 0) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 110, 26).addItemStacks(tools.get(0));
+        this.slot(builder, RecipeIngredientRole.INPUT, 110, 26).addItemStacks(tools.get(0));
       }
 
       if (tools.size() > 1) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 110, 26 + 22).addItemStacks(tools.get(1));
+        this.slot(builder, RecipeIngredientRole.INPUT, 110, 26 + 22).addItemStacks(tools.get(1));
       }
 
       if (tools.size() > 2) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 110, 26 + 44).addItemStacks(tools.get(2));
+        this.slot(builder, RecipeIngredientRole.INPUT, 110, 26 + 44).addItemStacks(tools.get(2));
       }
     }
   }
@@ -162,7 +169,7 @@ public class CategorySetupHandler {
 
     for (int y = 0; y < gridSize; y++) {
       for (int x = 0; x < gridSize; x++) {
-        gridSlots.add(builder.addSlot(RecipeIngredientRole.INPUT, x * 18 + 16, y * 18 + baseY));
+        gridSlots.add(this.slot(builder, RecipeIngredientRole.INPUT, x * 18 + 16, y * 18 + baseY));
       }
     }
 
@@ -200,10 +207,10 @@ public class CategorySetupHandler {
   private void setupOutput(ArtisanRecipe recipe, IRecipeLayoutBuilder builder, EnumTier tier) {
 
     if (tier == EnumTier.WORKTABLE || tier == EnumTier.WORKSTATION) {
-      builder.addSlot(RecipeIngredientRole.OUTPUT, 111, 31).addItemStack(recipe.getResultItem());
+      this.slot(builder, RecipeIngredientRole.OUTPUT, 111, 31).addItemStack(recipe.getResultItem());
 
     } else if (tier == EnumTier.WORKSHOP) {
-      builder.addSlot(RecipeIngredientRole.OUTPUT, 139, 48).addItemStack(recipe.getResultItem());
+      this.slot(builder, RecipeIngredientRole.OUTPUT, 139, 48).addItemStack(recipe.getResultItem());
     }
   }
 

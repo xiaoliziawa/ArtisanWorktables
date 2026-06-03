@@ -17,6 +17,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.core.BlockPos;
@@ -30,6 +32,7 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 public abstract class BaseBlock
@@ -133,6 +136,18 @@ public abstract class BaseBlock
   public PushReaction getPistonPushReaction(@Nonnull BlockState state) {
 
     return PushReaction.DESTROY;
+  }
+
+  @Nullable
+  @ParametersAreNonnullByDefault
+  @Override
+  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> blockEntityType) {
+
+    return (level, pos, blockState, blockEntity) -> {
+      if (blockEntity instanceof BaseBlockEntity baseBlockEntity) {
+        baseBlockEntity.tick();
+      }
+    };
   }
 
 }

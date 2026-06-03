@@ -61,6 +61,20 @@ mandatory = true
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
+# Required dependency: Mantle (library, prerequisite of Tinkers' Construct)
+[[dependencies."${mod_id}"]]
+modId = "mantle"
+mandatory = true
+versionRange = "[1.11.97,)"
+ordering = "AFTER"
+side = "BOTH"
+# Required dependency: Tinkers' Construct
+[[dependencies."${mod_id}"]]
+modId = "tconstruct"
+mandatory = true
+versionRange = "[3.11.1.158,)"
+ordering = "AFTER"
+side = "BOTH"
 # Optional integration: JEI recipe display
 [[dependencies."${mod_id}"]]
 modId = "jei"
