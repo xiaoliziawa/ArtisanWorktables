@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 
 import javax.annotation.Nullable;
 import java.util.EnumMap;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public interface IProxy {
 
-  void initialize();
+  void initialize(ModLoadingContext modLoadingContext);
 
   void registerModEventHandlers(IEventBus eventBus);
 

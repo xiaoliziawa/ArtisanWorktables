@@ -52,15 +52,20 @@ public abstract class BaseCategory<R>
 
   @Nonnull
   @Override
-  public IDrawable getBackground() {
-
-    return this.background;
-  }
-
-  @Nonnull
-  @Override
   public IDrawable getIcon() {
 
     return this.icon;
+  }
+
+  @Override
+  public int getWidth() {
+
+    return this.background.getWidth();
+  }
+
+  @Override
+  public int getHeight() {
+
+    return this.background.getHeight();
   }
 }

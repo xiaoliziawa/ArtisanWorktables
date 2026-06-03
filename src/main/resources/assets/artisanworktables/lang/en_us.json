@@ -55,5 +55,9 @@
   "jei.artisanworktables.xp.cost": "XP Cost: %d",
   "jei.artisanworktables.level.cost": "Level Cost: %d",
   "jei.artisanworktables.xp.required": "Minimum XP: %d",
-  "jei.artisanworktables.level.required": "Minimum Level: %d"
+  "jei.artisanworktables.level.required": "Minimum Level: %d",
+  "jei.artisanworktables.secondary.consumed": "Secondary Ingredient: Consumed",
+  "jei.artisanworktables.secondary.not_consumed": "Secondary Ingredient: Not Consumed",
+  "jei.artisanworktables.secondary.status.consumed": "Secondary: Consumed",
+  "jei.artisanworktables.secondary.status.not_consumed": "Secondary: Not Consumed"
 }

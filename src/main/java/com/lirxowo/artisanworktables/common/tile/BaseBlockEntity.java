@@ -59,7 +59,8 @@ public abstract class BaseBlockEntity
   private MageToolObserver mageToolObserver;
 
   private final List<BaseContainer> containerList = new ArrayList<>();
-  private final CraftHandler craftHandler = new CraftHandler();
+  @Nullable
+  private CraftHandler craftHandler;
 
   protected boolean requiresRecipeUpdate;
 
@@ -372,9 +373,18 @@ public abstract class BaseBlockEntity
       return;
     }
 
-    this.craftHandler.doCraft(this.level, this.getBlockPos(), player, recipe, this.getInventory(player), null);
+    this.getCraftHandler().doCraft(this.level, this.getBlockPos(), player, recipe, this.getInventory(player), null);
 
     this.setChanged();
+  }
+
+  private CraftHandler getCraftHandler() {
+
+    if (this.craftHandler == null) {
+      this.craftHandler = new CraftHandler();
+    }
+
+    return this.craftHandler;
   }
 
   public void notifyCraftComplete() {

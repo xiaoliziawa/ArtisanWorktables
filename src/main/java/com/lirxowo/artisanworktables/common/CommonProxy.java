@@ -5,7 +5,9 @@ import com.lirxowo.artisanworktables.ArtisanWorktablesModCommonConfig;
 import com.lirxowo.artisanworktables.IProxy;
 import com.lirxowo.artisanworktables.common.event.*;
 import com.lirxowo.artisanworktables.common.network.*;
+import com.lirxowo.artisanworktables.common.plugin.tconstruct.TinkersToolHandler;
 import com.lirxowo.artisanworktables.common.recipe.ArtisanRecipe;
+import com.lirxowo.artisanworktables.common.recipe.ArtisanToolHandlers;
 import com.lirxowo.artisanworktables.common.reference.EnumTier;
 import com.lirxowo.artisanworktables.common.reference.EnumType;
 import com.lirxowo.athenaeum.network.api.NetworkAPI;
@@ -19,6 +21,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import net.minecraftforge.fml.config.ModConfig;
@@ -50,7 +53,7 @@ public class CommonProxy
   }
 
   @Override
-  public void initialize() {
+  public void initialize(ModLoadingContext modLoadingContext) {
 
     String modId = ArtisanWorktablesMod.MOD_ID;
     Path configPath = FMLPaths.CONFIGDIR.get();
@@ -63,7 +66,6 @@ public class CommonProxy
       ArtisanWorktablesMod.LOGGER.error("Error creating folder: " + modConfigPath, e);
     }
 
-    ModLoadingContext modLoadingContext = ModLoadingContext.get();
     String configFilenameCommon = modId + "-common.toml";
     modLoadingContext.registerConfig(ModConfig.Type.COMMON, ArtisanWorktablesModCommonConfig.CONFIG_SPEC, modId + "/" + configFilenameCommon);
     ConfigHelper.loadConfig(ArtisanWorktablesModCommonConfig.CONFIG_SPEC, modConfigPath.resolve(configFilenameCommon));
@@ -80,6 +82,16 @@ public class CommonProxy
     this.packetService.registerMessage(SCPacketWorktableContainerJoinedBlockBreak.class, SCPacketWorktableContainerJoinedBlockBreak.class);
     this.packetService.registerMessage(SCPacketWorktableFluidUpdate.class, SCPacketWorktableFluidUpdate.class);
     this.packetService.registerMessage(SCPacketIncompatible.class, SCPacketIncompatible.class);
+
+    this.registerToolHandlers();
+  }
+
+  private void registerToolHandlers() {
+
+    if (ModList.get().isLoaded("tconstruct")) {
+      ArtisanToolHandlers.register(new TinkersToolHandler());
+      ArtisanWorktablesMod.LOGGER.info("Tinkers' Construct detected; registered Tinkers tool handler.");
+    }
   }
 
   @Override

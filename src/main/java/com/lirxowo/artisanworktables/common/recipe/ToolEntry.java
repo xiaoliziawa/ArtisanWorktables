@@ -1,11 +1,13 @@
 package com.lirxowo.artisanworktables.common.recipe;
 
 import com.lirxowo.artisanworktables.api.IToolHandler;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ToolEntry {
 
@@ -33,11 +35,18 @@ public class ToolEntry {
   private final Ingredient tool;
   private final ItemStack[] toolItemStacks;
   private final int damage;
+  private final boolean matchNbt;
 
   public ToolEntry(Ingredient tool, int damage) {
 
+    this(tool, damage, false);
+  }
+
+  public ToolEntry(Ingredient tool, int damage, boolean matchNbt) {
+
     this.tool = tool;
     this.damage = damage;
+    this.matchNbt = matchNbt;
 
     ItemStack[] matchingStacks = tool.getItems();
     this.toolItemStacks = new ItemStack[matchingStacks.length];
@@ -62,15 +71,45 @@ public class ToolEntry {
     return this.damage;
   }
 
+  public boolean matchNbt() {
+
+    return this.matchNbt;
+  }
+
   public boolean matches(IToolHandler handler, ItemStack tool) {
 
     for (ItemStack toolItemStack : this.toolItemStacks) {
 
-      if (handler.matches(tool, toolItemStack)) {
+      if (handler.matches(tool, toolItemStack)
+          && (!this.matchNbt || ToolEntry.nbtMatches(toolItemStack, tool))) {
         return true;
       }
     }
 
     return false;
+  }
+
+  /**
+   * Compares the NBT of the expected and actual tool, ignoring durability (the
+   * {@code Damage} tag) so that worn tools still match.
+   */
+  private static boolean nbtMatches(ItemStack expected, ItemStack actual) {
+
+    return Objects.equals(ToolEntry.stripDamage(expected.getTag()), ToolEntry.stripDamage(actual.getTag()));
+  }
+
+  private static CompoundTag stripDamage(CompoundTag tag) {
+
+    if (tag == null || tag.isEmpty()) {
+      return null;
+    }
+
+    if (!tag.contains("Damage")) {
+      return tag;
+    }
+
+    CompoundTag copy = tag.copy();
+    copy.remove("Damage");
+    return copy.isEmpty() ? null : copy;
   }
 }

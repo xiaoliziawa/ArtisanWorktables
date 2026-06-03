@@ -44,7 +44,7 @@ public class ArtisanWorktablesMod {
     ArtisanWorktablesMod.instance = this;
 
     this.proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
-    this.proxy.initialize();
+    this.proxy.initialize(context);
     this.proxy.registerModEventHandlers(context.getModEventBus());
     this.proxy.registerForgeEventHandlers(MinecraftForge.EVENT_BUS);
   }

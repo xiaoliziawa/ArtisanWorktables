@@ -61,17 +61,17 @@ mandatory = true
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
-# Required dependency: Mantle (library, prerequisite of Tinkers' Construct)
+# Optional integration: Mantle (library, prerequisite of Tinkers' Construct)
 [[dependencies."${mod_id}"]]
 modId = "mantle"
-mandatory = true
+mandatory = false
 versionRange = "[1.11.97,)"
 ordering = "AFTER"
 side = "BOTH"
-# Required dependency: Tinkers' Construct
+# Optional integration: Tinkers' Construct (custom tool durability support)
 [[dependencies."${mod_id}"]]
 modId = "tconstruct"
-mandatory = true
+mandatory = false
 versionRange = "[3.11.1.158,)"
 ordering = "AFTER"
 side = "BOTH"

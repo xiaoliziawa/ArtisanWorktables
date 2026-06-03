@@ -38,7 +38,7 @@
 | `result` | 主输出物品 | 必填 |
 | `pattern` + `key` | 有序配方图案（仅 shaped） | shaped 必填 |
 | `ingredients` | 无序配方材料列表（仅 shapeless） | shapeless 必填 |
-| `tools` | 所需工具（最多 3 个），每个含耐久消耗 | 无 |
+| `tools` | 所需工具（最多 3 个），每个含耐久消耗、可选 NBT 匹配（`matchNbt`） | 无 |
 | `secondaryIngredients` | 副材料（最多 9 个，放在副输入格） | 无 |
 | `consumeSecondaryIngredients` | 是否消耗副材料 | `true` |
 | `fluidIngredient` | 流体消耗 | 无 |
@@ -362,6 +362,34 @@ event.recipes.artisanworktables.basic_shapeless(
 
 > - SNBT 里附魔等级 `lvl` 必须是 **short**：KubeJS 写 `5s`、CrT 写 `5 as short`；写成普通整数会匹配/写入失败。
 > - 输出 NBT 用 `nbt`（KubeJS 自动处理，CrT 用 `.withTag`），**不要用 `data`**（模组会直接报错）。
+
+### 6.3 工具按 NBT 匹配（`matchNbt` 开关）
+
+默认情况下，配方工具只按**物品类型**匹配、忽略 NBT（任意同种镐都能用）。给工具加 `matchNbt` 开关后，会额外要求工具的 NBT 一致——并**自动忽略耐久（`Damage`）**，所以磨损的工具仍可用。常用于要求「特定名字的锤子」等。
+
+**CraftTweaker**：`.tool(工具, 耐久消耗, matchNbt)`，第三个参数传 `true`：
+
+```zenscript
+val hammer = <item:minecraft:iron_pickaxe>.withTag({display: {Name: "{\"text\":\"Hammer\"}"}});
+
+Recipe.type(Type.BASIC)
+    .shapeless([<item:minecraft:stone>])
+    .tool(hammer, 10, true)   // 必须是名为 Hammer 的镐
+    .output(<item:minecraft:cobblestone>)
+    .register("hammer_cobble");
+```
+
+**KubeJS**：`tools` 项加 `matchNbt: true`，并用 `nbt` 提供期望 NBT：
+
+```js
+.tools([
+  { item: 'minecraft:iron_pickaxe', damage: 10, matchNbt: true, nbt: '{display:{Name:\'{"text":"Hammer"}\'}}' }
+])
+```
+
+> - `matchNbt` 默认 `false`，老配方行为不变（向后兼容）。
+> - 比较时**忽略耐久**，工具用旧了仍能匹配。
+> - 对 Tinkers' Construct 等定制工具，其 NBT 含材料/修饰信息且每把不同，`matchNbt` 通常不实用；想要「任意材料的某种 TCon 工具」保持默认（不开 `matchNbt`）即可。
 
 ---
 

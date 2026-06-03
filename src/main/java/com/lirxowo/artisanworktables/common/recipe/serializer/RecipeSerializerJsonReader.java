@@ -123,9 +123,22 @@ public abstract class RecipeSerializerJsonReader<R extends ArtisanRecipe>
 
       for (JsonElement jsonElement : toolArray) {
         JsonObject toolObject = jsonElement.getAsJsonObject();
-        Ingredient tool = Ingredient.fromJson(toolObject);
         int damage = GsonHelper.getAsInt(toolObject, "damage", 1);
-        result.add(new ToolEntry(tool, damage));
+        boolean matchNbt = GsonHelper.getAsBoolean(toolObject, "matchNbt", false);
+
+        Ingredient tool;
+
+        if (matchNbt && toolObject.has("nbt")) {
+          // Build an item-value ingredient carrying the expected NBT so it survives
+          // packet sync; the NBT comparison (ignoring durability) happens in ToolEntry.
+          ItemStack expected = RecipeSerializerHelper.deserializeItem(toolObject);
+          tool = Ingredient.of(expected);
+
+        } else {
+          tool = Ingredient.fromJson(toolObject);
+        }
+
+        result.add(new ToolEntry(tool, damage, matchNbt));
       }
 
       if (result.size() > 3) {

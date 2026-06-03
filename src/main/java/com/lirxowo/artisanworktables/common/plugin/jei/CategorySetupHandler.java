@@ -9,9 +9,9 @@ import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.core.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
@@ -72,6 +72,7 @@ public class CategorySetupHandler {
 
         if (i + 1 <= secondaryIngredients.size()) {
           this.slot(builder, RecipeIngredientRole.CATALYST, 4 + (18 * i), yPos)
+              .addRichTooltipCallback((recipeSlotView, tooltip) -> tooltip.add(SecondaryIngredientDisplay.tooltip(recipe)))
               .addItemStacks(Arrays.asList(secondaryIngredients.get(i).getItems()));
         }
       }
@@ -87,12 +88,14 @@ public class CategorySetupHandler {
       long capacity = (long) fluidStack.getAmount() * 2;
 
       if (tier == EnumTier.WORKTABLE || tier == EnumTier.WORKSTATION) {
-        this.slot(builder, RecipeIngredientRole.CATALYST, 5, 14)
+        // Fluid column keeps the original (un-offset) position; the +1 slot offset
+        // would push the tall fluid renderer out of its background frame.
+        builder.addSlot(RecipeIngredientRole.CATALYST, 5, 14)
             .setFluidRenderer(capacity, false, 6, 52)
             .addIngredient(ForgeTypes.FLUID_STACK, fluidStack);
 
       } else if (tier == EnumTier.WORKSHOP) {
-        this.slot(builder, RecipeIngredientRole.CATALYST, 5, 4)
+        builder.addSlot(RecipeIngredientRole.CATALYST, 5, 4)
             .setFluidRenderer(capacity, false, 6, 88)
             .addIngredient(ForgeTypes.FLUID_STACK, fluidStack);
       }

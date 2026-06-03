@@ -13,8 +13,12 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.NonNullList;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class CategoryDrawHandler {
+
+  private static final int TEXT_MARGIN = 5;
+  private static final int SECONDARY_STATUS_RIGHT_EDGE = 150;
 
   private final EnumTier tier;
 
@@ -32,7 +36,10 @@ public class CategoryDrawHandler {
     guiGraphics.pose().translate(0, 0, 200);
 
     this.drawToolDamageStrings(recipe, guiGraphics, font);
-    this.drawExperienceString(recipe, guiGraphics, backgroundHeight, font);
+
+    String experienceString = this.getExperienceString(recipe);
+    this.drawExperienceString(font, guiGraphics, backgroundHeight, experienceString);
+    this.drawSecondaryIngredientString(recipe, guiGraphics, backgroundHeight, font, experienceString);
 
     guiGraphics.pose().pushPose();
     guiGraphics.pose().scale(0.5f, 0.5f, 1);
@@ -44,17 +51,16 @@ public class CategoryDrawHandler {
     guiGraphics.pose().popPose();
   }
 
-  private void drawExperienceString(@Nonnull ArtisanRecipe recipe, GuiGraphics guiGraphics, int backgroundHeight, Font font) {
-
-    String experienceString = null;
+  @Nullable
+  private String getExperienceString(@Nonnull ArtisanRecipe recipe) {
 
     if (recipe.getExperienceRequired() > 0) {
 
       if (recipe.consumeExperience()) {
-        experienceString = I18n.get("jei.artisanworktables.xp.cost", recipe.getExperienceRequired());
+        return I18n.get("jei.artisanworktables.xp.cost", recipe.getExperienceRequired());
 
       } else {
-        experienceString = I18n.get(
+        return I18n.get(
             "jei.artisanworktables.xp.required",
             recipe.getExperienceRequired()
         );
@@ -63,16 +69,14 @@ public class CategoryDrawHandler {
     } else if (recipe.getLevelRequired() > 0) {
 
       if (recipe.consumeExperience()) {
-        experienceString = I18n.get("jei.artisanworktables.level.cost", recipe.getLevelRequired());
+        return I18n.get("jei.artisanworktables.level.cost", recipe.getLevelRequired());
 
       } else {
-        experienceString = I18n.get("jei.artisanworktables.level.required", recipe.getLevelRequired());
+        return I18n.get("jei.artisanworktables.level.required", recipe.getLevelRequired());
       }
     }
 
-    if (experienceString != null) {
-      this.drawExperienceString(font, guiGraphics, backgroundHeight, experienceString);
-    }
+    return null;
   }
 
   private void drawToolDamageStrings(@Nonnull ArtisanRecipe recipe, GuiGraphics guiGraphics, Font font) {
@@ -161,14 +165,54 @@ public class CategoryDrawHandler {
     }
   }
 
-  private void drawExperienceString(Font font, GuiGraphics guiGraphics, int backgroundHeight, String experienceString) {
+  private void drawExperienceString(Font font, GuiGraphics guiGraphics, int backgroundHeight, @Nullable String experienceString) {
+
+    if (experienceString == null) {
+      return;
+    }
 
     guiGraphics.drawString(
         font,
         experienceString,
-        5,
+        TEXT_MARGIN,
         backgroundHeight - 10,
         0xFF80FF20,
+        false
+    );
+  }
+
+  private void drawSecondaryIngredientString(
+      @Nonnull ArtisanRecipe recipe,
+      GuiGraphics guiGraphics,
+      int backgroundHeight,
+      Font font,
+      @Nullable String experienceString
+  ) {
+
+    if (recipe.getSecondaryIngredients().isEmpty()) {
+      return;
+    }
+
+    String label = SecondaryIngredientDisplay.label(recipe);
+    int x = TEXT_MARGIN;
+    int y = backgroundHeight - 10;
+
+    if (experienceString != null) {
+      int nextX = TEXT_MARGIN + font.width(experienceString) + 8;
+
+      if (nextX + font.width(label) <= SECONDARY_STATUS_RIGHT_EDGE) {
+        x = nextX;
+      } else {
+        y -= 10;
+      }
+    }
+
+    guiGraphics.drawString(
+        font,
+        label,
+        x,
+        y,
+        SecondaryIngredientDisplay.color(recipe),
         false
     );
   }

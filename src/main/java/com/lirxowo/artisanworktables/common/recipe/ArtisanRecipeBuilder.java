@@ -85,7 +85,12 @@ public class ArtisanRecipeBuilder {
 
   public ArtisanRecipeBuilder addTool(Ingredient tool, int damage) {
 
-    this.tools.add(new ToolEntry(tool, damage));
+    return this.addTool(tool, damage, false);
+  }
+
+  public ArtisanRecipeBuilder addTool(Ingredient tool, int damage, boolean matchNbt) {
+
+    this.tools.add(new ToolEntry(tool, damage, matchNbt));
     return this;
   }
 

@@ -90,7 +90,13 @@ public class ZenRecipe {
   @ZenCodeType.Method
   public ZenRecipe tool(IIngredient tool, int damage) {
 
-    this.builder.addTool(tool.asVanillaIngredient(), damage);
+    return this.tool(tool, damage, false);
+  }
+
+  @ZenCodeType.Method
+  public ZenRecipe tool(IIngredient tool, int damage, boolean matchNbt) {
+
+    this.builder.addTool(tool.asVanillaIngredient(), damage, matchNbt);
     return this;
   }
 

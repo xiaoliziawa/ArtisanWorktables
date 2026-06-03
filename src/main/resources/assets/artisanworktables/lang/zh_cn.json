@@ -55,5 +55,9 @@
   "jei.artisanworktables.xp.cost": "经验消耗：%d",
   "jei.artisanworktables.level.cost": "等级消耗：%d",
   "jei.artisanworktables.xp.required": "最低经验：%d",
-  "jei.artisanworktables.level.required": "最低等级：%d"
+  "jei.artisanworktables.level.required": "最低等级：%d",
+  "jei.artisanworktables.secondary.consumed": "副材料：消耗",
+  "jei.artisanworktables.secondary.not_consumed": "副材料：不消耗",
+  "jei.artisanworktables.secondary.status.consumed": "副材料：消耗",
+  "jei.artisanworktables.secondary.status.not_consumed": "副材料：不消耗"
 }

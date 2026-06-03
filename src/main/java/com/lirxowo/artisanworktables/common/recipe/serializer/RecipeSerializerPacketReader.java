@@ -81,7 +81,8 @@ public abstract class RecipeSerializerPacketReader<R extends ArtisanRecipe>
     for (int i = 0; i < size; i++) {
       Ingredient ingredient = Ingredient.fromNetwork(buffer);
       int damage = buffer.readInt();
-      result.add(new ToolEntry(ingredient, damage));
+      boolean matchNbt = buffer.readBoolean();
+      result.add(new ToolEntry(ingredient, damage, matchNbt));
     }
 
     return result;
