@@ -59,5 +59,6 @@
   "jei.artisanworktables.secondary.consumed": "Secondary Ingredient: Consumed",
   "jei.artisanworktables.secondary.not_consumed": "Secondary Ingredient: Not Consumed",
   "jei.artisanworktables.secondary.status.consumed": "Secondary: Consumed",
-  "jei.artisanworktables.secondary.status.not_consumed": "Secondary: Not Consumed"
+  "jei.artisanworktables.secondary.status.not_consumed": "Secondary: Not Consumed",
+  "jei.artisanworktables.transfer.missing_tool": "Missing a required tool"
 }

@@ -59,5 +59,6 @@
   "jei.artisanworktables.secondary.consumed": "Nebenmaterial: Verbraucht",
   "jei.artisanworktables.secondary.not_consumed": "Nebenmaterial: Bleibt",
   "jei.artisanworktables.secondary.status.consumed": "Nebenmaterial: Verbraucht",
-  "jei.artisanworktables.secondary.status.not_consumed": "Nebenmaterial: Bleibt"
+  "jei.artisanworktables.secondary.status.not_consumed": "Nebenmaterial: Bleibt",
+  "jei.artisanworktables.transfer.missing_tool": "Benötigtes Werkzeug fehlt"
 }

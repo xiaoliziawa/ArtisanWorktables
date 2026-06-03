@@ -59,5 +59,6 @@
   "jei.artisanworktables.secondary.consumed": "副材料：消耗",
   "jei.artisanworktables.secondary.not_consumed": "副材料：不消耗",
   "jei.artisanworktables.secondary.status.consumed": "副材料：消耗",
-  "jei.artisanworktables.secondary.status.not_consumed": "副材料：不消耗"
+  "jei.artisanworktables.secondary.status.not_consumed": "副材料：不消耗",
+  "jei.artisanworktables.transfer.missing_tool": "缺少所需工具"
 }

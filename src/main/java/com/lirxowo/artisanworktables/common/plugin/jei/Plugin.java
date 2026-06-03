@@ -16,10 +16,12 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.transfer.IRecipeTransferHandlerHelper;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
+import mezz.jei.api.runtime.IIngredientManager;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -124,6 +126,9 @@ public class Plugin
   @Override
   public void registerRecipeTransferHandlers(@Nonnull IRecipeTransferRegistration registry) {
 
+    IRecipeTransferHandlerHelper transferHelper = registry.getTransferHelper();
+    IIngredientManager ingredientManager = registry.getJeiHelpers().getIngredientManager();
+
     for (EnumTier tier : EnumTier.values()) {
 
       Class<? extends BaseContainer> containerClass;
@@ -143,9 +148,23 @@ public class Plugin
       }
 
       for (EnumType type : EnumType.values()) {
-        registry.addRecipeTransferHandler(new RecipeTransferInfo<>(containerClass, tier, type, CATEGORY_KEYS.get(tier).get(type)));
+        Plugin.registerToolAwareTransfer(registry, transferHelper, ingredientManager, containerClass, tier, type, CATEGORY_KEYS.get(tier).get(type));
       }
     }
+  }
+
+  private static <C extends BaseContainer> void registerToolAwareTransfer(
+      IRecipeTransferRegistration registry,
+      IRecipeTransferHandlerHelper transferHelper,
+      IIngredientManager ingredientManager,
+      Class<C> containerClass,
+      EnumTier tier,
+      EnumType type,
+      RecipeType<ArtisanRecipe> recipeType
+  ) {
+
+    RecipeTransferInfo<C> transferInfo = new RecipeTransferInfo<>(containerClass, tier, type, recipeType);
+    registry.addRecipeTransferHandler(new ArtisanRecipeTransferHandler<>(transferInfo, transferHelper, ingredientManager), recipeType);
   }
 
   private List<ArtisanRecipe> getRecipes(RecipeManager recipeManager, EnumTier tier, EnumType type) {

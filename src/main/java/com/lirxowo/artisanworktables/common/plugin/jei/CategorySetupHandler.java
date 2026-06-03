@@ -22,6 +22,8 @@ public class CategorySetupHandler {
 
   private static final int SLOT_OFFSET = 1;
 
+  public static final String TOOL_SLOT_NAME_PREFIX = "aw.tool.";
+
   private final EnumTier tier;
 
   public CategorySetupHandler(EnumTier tier) {
@@ -134,33 +136,40 @@ public class CategorySetupHandler {
     if (tier == EnumTier.WORKTABLE) {
 
       if (tools.size() > 0) {
-        this.slot(builder, RecipeIngredientRole.INPUT, 74, 31).addItemStacks(tools.get(0));
+        this.toolSlot(builder, 0, 74, 31, tools.get(0));
       }
 
     } else if (tier == EnumTier.WORKSTATION) {
 
       if (tools.size() > 0) {
-        this.slot(builder, RecipeIngredientRole.INPUT, 74, 20).addItemStacks(tools.get(0));
+        this.toolSlot(builder, 0, 74, 20, tools.get(0));
       }
 
       if (tools.size() > 1) {
-        this.slot(builder, RecipeIngredientRole.INPUT, 74, 20 + 22).addItemStacks(tools.get(1));
+        this.toolSlot(builder, 1, 74, 20 + 22, tools.get(1));
       }
 
     } else if (tier == EnumTier.WORKSHOP) {
 
       if (tools.size() > 0) {
-        this.slot(builder, RecipeIngredientRole.INPUT, 110, 26).addItemStacks(tools.get(0));
+        this.toolSlot(builder, 0, 110, 26, tools.get(0));
       }
 
       if (tools.size() > 1) {
-        this.slot(builder, RecipeIngredientRole.INPUT, 110, 26 + 22).addItemStacks(tools.get(1));
+        this.toolSlot(builder, 1, 110, 26 + 22, tools.get(1));
       }
 
       if (tools.size() > 2) {
-        this.slot(builder, RecipeIngredientRole.INPUT, 110, 26 + 44).addItemStacks(tools.get(2));
+        this.toolSlot(builder, 2, 110, 26 + 44, tools.get(2));
       }
     }
+  }
+
+  private void toolSlot(IRecipeLayoutBuilder builder, int index, int x, int y, List<ItemStack> stacks) {
+
+    this.slot(builder, RecipeIngredientRole.INPUT, x, y)
+        .setSlotName(TOOL_SLOT_NAME_PREFIX + index)
+        .addItemStacks(stacks);
   }
 
   private void setupCraftingGrid(ArtisanRecipe recipe, IRecipeLayoutBuilder builder, EnumTier tier) {
