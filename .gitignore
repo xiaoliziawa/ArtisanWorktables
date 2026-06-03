@@ -21,3 +21,17 @@ hs_err_pid*
 run
 /src/generated/
 /run-data/
+
+# Allow example recipe scripts inside the ignored run directory
+!/run/
+/run/*
+!/run/scripts/
+/run/scripts/*
+!/run/scripts/artisanworktables_examples.zs
+!/run/scripts/artisanworktables_examples_en.zs
+!/run/kubejs/
+/run/kubejs/*
+!/run/kubejs/server_scripts/
+/run/kubejs/server_scripts/*
+!/run/kubejs/server_scripts/artisanworktables_examples.js
+!/run/kubejs/server_scripts/artisanworktables_examples_en.js
