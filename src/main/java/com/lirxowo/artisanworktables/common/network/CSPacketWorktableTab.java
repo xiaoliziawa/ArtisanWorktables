@@ -2,8 +2,8 @@ package com.lirxowo.artisanworktables.common.network;
 
 import com.lirxowo.artisanworktables.common.container.ContainerProvider;
 import com.lirxowo.artisanworktables.common.tile.BaseBlockEntity;
-import com.lirxowo.athenaeum.network.spi.packet.IMessage;
-import com.lirxowo.athenaeum.network.spi.packet.SPacketTileEntityBase;
+import com.lirxowo.oraculum.network.spi.packet.IMessage;
+import com.lirxowo.oraculum.network.spi.packet.SPacketTileEntityBase;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;

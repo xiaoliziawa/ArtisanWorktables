@@ -1,7 +1,7 @@
 package com.lirxowo.artisanworktables.common.tile.handler;
 
-import com.lirxowo.athenaeum.inventory.spi.ObservableStackHandler;
-import com.lirxowo.athenaeum.network.spi.tile.ITileDataItemStackHandler;
+import com.lirxowo.oraculum.inventory.spi.ObservableStackHandler;
+import com.lirxowo.oraculum.network.spi.tile.ITileDataItemStackHandler;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;

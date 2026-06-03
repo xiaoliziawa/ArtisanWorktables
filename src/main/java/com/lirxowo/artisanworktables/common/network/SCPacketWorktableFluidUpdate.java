@@ -1,8 +1,8 @@
 package com.lirxowo.artisanworktables.common.network;
 
 import com.lirxowo.artisanworktables.common.tile.BaseBlockEntity;
-import com.lirxowo.athenaeum.network.spi.packet.CPacketTileEntityBase;
-import com.lirxowo.athenaeum.network.spi.packet.IMessage;
+import com.lirxowo.oraculum.network.spi.packet.CPacketTileEntityBase;
+import com.lirxowo.oraculum.network.spi.packet.IMessage;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.block.entity.BlockEntity;

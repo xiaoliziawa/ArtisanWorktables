@@ -1,10 +1,10 @@
 package com.lirxowo.artisanworktables.client.screen.element;
 
 import com.lirxowo.artisanworktables.client.ReferenceTexture;
-import com.lirxowo.athenaeum.gui.GuiContainerBase;
-import com.lirxowo.athenaeum.gui.GuiHelper;
-import com.lirxowo.athenaeum.gui.element.IGuiElementClickable;
-import com.lirxowo.athenaeum.gui.element.IGuiElementTooltipProvider;
+import com.lirxowo.oraculum.gui.GuiContainerBase;
+import com.lirxowo.oraculum.gui.GuiHelper;
+import com.lirxowo.oraculum.gui.element.IGuiElementClickable;
+import com.lirxowo.oraculum.gui.element.IGuiElementTooltipProvider;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;

@@ -2,8 +2,8 @@ package com.lirxowo.artisanworktables.common.network;
 
 import com.lirxowo.artisanworktables.ArtisanWorktablesMod;
 import com.lirxowo.artisanworktables.common.tile.BaseBlockEntity;
-import com.lirxowo.athenaeum.network.spi.packet.IMessage;
-import com.lirxowo.athenaeum.network.spi.packet.SPacketTileEntityBase;
+import com.lirxowo.oraculum.network.spi.packet.IMessage;
+import com.lirxowo.oraculum.network.spi.packet.SPacketTileEntityBase;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraftforge.fluids.capability.IFluidHandler;

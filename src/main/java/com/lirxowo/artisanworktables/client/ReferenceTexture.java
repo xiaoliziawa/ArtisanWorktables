@@ -1,7 +1,7 @@
 package com.lirxowo.artisanworktables.client;
 
 import com.lirxowo.artisanworktables.ArtisanWorktablesMod;
-import com.lirxowo.athenaeum.gui.Texture;
+import com.lirxowo.oraculum.gui.Texture;
 import net.minecraft.resources.ResourceLocation;
 
 public class ReferenceTexture {

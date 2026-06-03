@@ -2,7 +2,7 @@ package com.lirxowo.artisanworktables.client.screen;
 
 import com.lirxowo.artisanworktables.client.ReferenceTexture;
 import com.lirxowo.artisanworktables.common.container.ToolboxMechanicalContainer;
-import com.lirxowo.athenaeum.gui.Texture;
+import com.lirxowo.oraculum.gui.Texture;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.network.chat.Component;
 

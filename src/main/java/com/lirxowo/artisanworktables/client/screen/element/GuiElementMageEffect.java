@@ -1,8 +1,8 @@
 package com.lirxowo.artisanworktables.client.screen.element;
 
 import com.lirxowo.artisanworktables.common.container.BaseContainer;
-import com.lirxowo.athenaeum.gui.GuiContainerBase;
-import com.lirxowo.athenaeum.gui.element.GuiElementBase;
+import com.lirxowo.oraculum.gui.GuiContainerBase;
+import com.lirxowo.oraculum.gui.element.GuiElementBase;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.util.Mth;
 

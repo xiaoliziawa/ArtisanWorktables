@@ -4,7 +4,7 @@ import com.lirxowo.artisanworktables.api.IToolHandler;
 import com.lirxowo.artisanworktables.common.tile.BaseBlockEntity;
 import com.lirxowo.artisanworktables.common.util.EnchantmentHelper;
 import com.lirxowo.artisanworktables.common.util.Util;
-import com.lirxowo.athenaeum.util.StackHelper;
+import com.lirxowo.oraculum.util.StackHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;

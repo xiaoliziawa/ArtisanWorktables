@@ -1,7 +1,7 @@
 package com.lirxowo.artisanworktables.common.container;
 
 import com.lirxowo.artisanworktables.common.tile.ToolboxBlockEntity;
-import com.lirxowo.athenaeum.gui.ContainerBase;
+import com.lirxowo.oraculum.gui.ContainerBase;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;

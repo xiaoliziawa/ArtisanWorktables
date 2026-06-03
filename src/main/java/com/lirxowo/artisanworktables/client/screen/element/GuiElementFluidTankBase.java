@@ -2,8 +2,8 @@ package com.lirxowo.artisanworktables.client.screen.element;
 
 import com.lirxowo.artisanworktables.ArtisanWorktablesMod;
 import com.lirxowo.artisanworktables.common.network.CSPacketWorktableTankDestroyFluid;
-import com.lirxowo.athenaeum.gui.GuiContainerBase;
-import com.lirxowo.athenaeum.gui.element.GuiElementFluidTankVertical;
+import com.lirxowo.oraculum.gui.GuiContainerBase;
+import com.lirxowo.oraculum.gui.element.GuiElementFluidTankVertical;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.core.BlockPos;

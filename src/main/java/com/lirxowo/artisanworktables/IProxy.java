@@ -2,8 +2,8 @@ package com.lirxowo.artisanworktables;
 
 import com.lirxowo.artisanworktables.common.recipe.ArtisanRecipe;
 import com.lirxowo.artisanworktables.common.reference.EnumType;
-import com.lirxowo.athenaeum.network.spi.packet.IPacketService;
-import com.lirxowo.athenaeum.network.spi.tile.data.service.ITileDataService;
+import com.lirxowo.oraculum.network.spi.packet.IPacketService;
+import com.lirxowo.oraculum.network.spi.tile.data.service.ITileDataService;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeManager;

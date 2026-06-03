@@ -1,7 +1,7 @@
 package com.lirxowo.artisanworktables.common.network;
 
-import com.lirxowo.athenaeum.network.spi.packet.IMessage;
-import com.lirxowo.athenaeum.network.spi.packet.IMessageHandler;
+import com.lirxowo.oraculum.network.spi.packet.IMessage;
+import com.lirxowo.oraculum.network.spi.packet.IMessageHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.ConfirmScreen;
 import net.minecraft.client.resources.language.I18n;

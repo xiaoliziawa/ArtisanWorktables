@@ -4,7 +4,7 @@ import com.lirxowo.artisanworktables.common.recipe.ArtisanRecipe;
 import com.lirxowo.artisanworktables.common.recipe.ArtisanRecipeShapeless;
 import com.lirxowo.artisanworktables.common.recipe.ToolEntry;
 import com.lirxowo.artisanworktables.common.reference.EnumTier;
-import com.lirxowo.athenaeum.gui.GuiHelper;
+import com.lirxowo.oraculum.gui.GuiHelper;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;

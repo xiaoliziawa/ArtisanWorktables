@@ -1,10 +1,10 @@
 package com.lirxowo.artisanworktables.client.screen;
 
 import com.lirxowo.artisanworktables.common.container.ToolboxBaseContainer;
-import com.lirxowo.athenaeum.gui.GuiContainerBase;
-import com.lirxowo.athenaeum.gui.GuiHelper;
-import com.lirxowo.athenaeum.gui.Texture;
-import com.lirxowo.athenaeum.gui.element.GuiElementTextureRectangle;
+import com.lirxowo.oraculum.gui.GuiContainerBase;
+import com.lirxowo.oraculum.gui.GuiHelper;
+import com.lirxowo.oraculum.gui.Texture;
+import com.lirxowo.oraculum.gui.element.GuiElementTextureRectangle;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.network.chat.Component;

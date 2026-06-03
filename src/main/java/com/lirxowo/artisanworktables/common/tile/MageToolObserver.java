@@ -1,7 +1,7 @@
 package com.lirxowo.artisanworktables.common.tile;
 
 import com.lirxowo.artisanworktables.common.block.MageBaseBlock;
-import com.lirxowo.athenaeum.inventory.spi.ObservableStackHandler;
+import com.lirxowo.oraculum.inventory.spi.ObservableStackHandler;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;

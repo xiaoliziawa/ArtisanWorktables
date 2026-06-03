@@ -6,7 +6,7 @@ import com.lirxowo.artisanworktables.common.recipe.ICraftingMatrixStackHandler;
 import com.lirxowo.artisanworktables.common.reference.EnumTier;
 import com.lirxowo.artisanworktables.common.reference.EnumType;
 import com.lirxowo.artisanworktables.common.tile.BaseBlockEntity;
-import com.lirxowo.athenaeum.util.FluidHelper;
+import com.lirxowo.oraculum.util.FluidHelper;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.state.BlockState;

@@ -1,6 +1,6 @@
 package com.lirxowo.artisanworktables.common.container.slot;
 
-import com.lirxowo.athenaeum.inventory.spi.PredicateSlotItemHandler;
+import com.lirxowo.oraculum.inventory.spi.PredicateSlotItemHandler;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;

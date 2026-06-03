@@ -1,8 +1,8 @@
 package com.lirxowo.artisanworktables.common.network;
 
 import com.lirxowo.artisanworktables.common.container.BaseContainer;
-import com.lirxowo.athenaeum.network.spi.packet.IMessage;
-import com.lirxowo.athenaeum.network.spi.packet.PacketBlockPosBase;
+import com.lirxowo.oraculum.network.spi.packet.IMessage;
+import com.lirxowo.oraculum.network.spi.packet.PacketBlockPosBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.BlockPos;

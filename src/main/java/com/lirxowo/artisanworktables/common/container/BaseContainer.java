@@ -7,7 +7,7 @@ import com.lirxowo.artisanworktables.common.recipe.ArtisanRecipe;
 import com.lirxowo.artisanworktables.common.recipe.ICraftingMatrixStackHandler;
 import com.lirxowo.artisanworktables.common.tile.*;
 import com.lirxowo.artisanworktables.common.util.ToolValidationHelper;
-import com.lirxowo.athenaeum.gui.ContainerBase;
+import com.lirxowo.oraculum.gui.ContainerBase;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.server.level.ServerPlayer;
