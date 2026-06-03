@@ -3,6 +3,7 @@ package com.lirxowo.artisanworktables.api;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ToolAction;
 
 import javax.annotation.Nullable;
 
@@ -20,6 +21,11 @@ public interface IToolHandler {
    * @return true if the given tool matches the tool to match
    */
   boolean matches(ItemStack tool, ItemStack toolToMatch);
+
+  default boolean canPerformAction(ItemStack itemStack, ToolAction toolAction) {
+
+    return itemStack.getItem().canPerformAction(itemStack, toolAction);
+  }
 
   /**
    * @param itemStack the tool

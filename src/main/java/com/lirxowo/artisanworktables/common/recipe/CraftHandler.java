@@ -339,7 +339,13 @@ public class CraftHandler {
 
             ItemStack toolCopy = stackInSlot.copy();
 
-            if (this.onCraftDamageTool(recipe, stackInSlot, world, player)) {
+            boolean broken = this.onCraftDamageTool(recipe, stackInSlot, world, player);
+
+            if (tool.getDamage() > 0) {
+              toolStackHandler.setStackInSlot(j, stackInSlot.isEmpty() ? ItemStack.EMPTY : stackInSlot);
+            }
+
+            if (broken) {
 
               if (!world.isClientSide) {
                 world.playSound(

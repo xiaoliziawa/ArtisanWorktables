@@ -8,6 +8,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.fluids.FluidStack;
 
 public abstract class RecipeSerializerPacketReader<R extends ArtisanRecipe>
@@ -82,7 +83,8 @@ public abstract class RecipeSerializerPacketReader<R extends ArtisanRecipe>
       Ingredient ingredient = Ingredient.fromNetwork(buffer);
       int damage = buffer.readInt();
       boolean matchNbt = buffer.readBoolean();
-      result.add(new ToolEntry(ingredient, damage, matchNbt));
+      ToolAction toolAction = buffer.readBoolean() ? ToolAction.get(buffer.readUtf()) : null;
+      result.add(new ToolEntry(ingredient, damage, matchNbt, toolAction));
     }
 
     return result;

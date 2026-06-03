@@ -57,6 +57,11 @@ public abstract class RecipeSerializerPacketWriter<R extends ArtisanRecipe>
       tool.getTool().toNetwork(buffer);
       buffer.writeInt(tool.getDamage());
       buffer.writeBoolean(tool.matchNbt());
+      buffer.writeBoolean(tool.getToolAction() != null);
+
+      if (tool.getToolAction() != null) {
+        buffer.writeUtf(tool.getToolAction().name());
+      }
     }
   }
 }

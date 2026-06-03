@@ -11,6 +11,7 @@ import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 
@@ -27,8 +28,8 @@ import java.util.List;
  */
 public final class ToolValidationHelper {
 
-  private static final EnumMap<EnumType, Object2BooleanMap<ResourceLocation>> TYPE_CACHE;
-  private static final Object2BooleanMap<ResourceLocation> ALL_CACHE;
+  private static final EnumMap<EnumType, Object2BooleanMap<String>> TYPE_CACHE;
+  private static final Object2BooleanMap<String> ALL_CACHE;
 
   static {
     TYPE_CACHE = new EnumMap<>(EnumType.class);
@@ -47,21 +48,21 @@ public final class ToolValidationHelper {
 
     synchronized (ALL_CACHE) {
 
-      ResourceLocation resourceLocation = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(tool.getItem());
+      String cacheKey = ToolValidationHelper.getCacheKey(tool);
 
-      if (ALL_CACHE.containsKey(resourceLocation)) {
-        return ALL_CACHE.getBoolean(resourceLocation);
+      if (ALL_CACHE.containsKey(cacheKey)) {
+        return ALL_CACHE.getBoolean(cacheKey);
       }
 
       for (EnumType type : EnumType.values()) {
 
         if (ToolValidationHelper.isValidTool(type, tool, recipeManager)) {
-          ALL_CACHE.put(resourceLocation, true);
+          ALL_CACHE.put(cacheKey, true);
           return true;
         }
       }
 
-      ALL_CACHE.put(resourceLocation, false);
+      ALL_CACHE.put(cacheKey, false);
       return false;
     }
   }
@@ -69,12 +70,12 @@ public final class ToolValidationHelper {
   public static boolean isValidTool(EnumType type, ItemStack tool, RecipeManager recipeManager) {
 
     synchronized (TYPE_CACHE) {
-      ResourceLocation resourceLocation = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(tool.getItem());
+      String cacheKey = ToolValidationHelper.getCacheKey(tool);
 
-      Object2BooleanMap<ResourceLocation> cache = TYPE_CACHE.computeIfAbsent(type, (t) -> new Object2BooleanOpenHashMap<>());
+      Object2BooleanMap<String> cache = TYPE_CACHE.computeIfAbsent(type, (t) -> new Object2BooleanOpenHashMap<>());
 
-      if (cache.containsKey(resourceLocation)) {
-        return cache.getBoolean(resourceLocation);
+      if (cache.containsKey(cacheKey)) {
+        return cache.getBoolean(cacheKey);
       }
 
       IToolHandler toolHandler = ArtisanToolHandlers.get(tool);
@@ -92,7 +93,7 @@ public final class ToolValidationHelper {
         }
       }
 
-      cache.put(resourceLocation, result);
+      cache.put(cacheKey, result);
       return result;
     }
   }
@@ -108,18 +109,31 @@ public final class ToolValidationHelper {
       NonNullList<ToolEntry> tools = artisanRecipe.getTools();
 
       for (ToolEntry toolEntry : tools) {
-        ItemStack[] toolStacks = toolEntry.getToolStacks();
-
-        for (ItemStack recipeTool : toolStacks) {
-
-          if (toolHandler.matches(tool, recipeTool)) {
-            return true;
-          }
+        if (toolEntry.matches(toolHandler, tool)) {
+          return true;
         }
       }
     }
 
     return false;
+  }
+
+  private static String getCacheKey(ItemStack tool) {
+
+    ResourceLocation itemKey = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(tool.getItem());
+
+    if (!tool.hasTag()) {
+      return itemKey.toString();
+    }
+
+    CompoundTag tag = tool.getTag().copy();
+    tag.remove("Damage");
+
+    if (tag.isEmpty()) {
+      return itemKey.toString();
+    }
+
+    return itemKey + "|" + tag;
   }
 
   private ToolValidationHelper() {

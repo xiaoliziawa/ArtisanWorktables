@@ -75,6 +75,13 @@ mandatory = false
 versionRange = "[3.11.1.158,)"
 ordering = "AFTER"
 side = "BOTH"
+# Optional integration: Tetra (modular tool support)
+[[dependencies."${mod_id}"]]
+modId = "tetra"
+mandatory = false
+versionRange = "[6.13.0,)"
+ordering = "AFTER"
+side = "BOTH"
 # Optional integration: JEI recipe display
 [[dependencies."${mod_id}"]]
 modId = "jei"

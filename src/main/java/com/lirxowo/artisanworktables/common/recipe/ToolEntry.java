@@ -4,7 +4,9 @@ import com.lirxowo.artisanworktables.api.IToolHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.common.ToolAction;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -36,6 +38,8 @@ public class ToolEntry {
   private final ItemStack[] toolItemStacks;
   private final int damage;
   private final boolean matchNbt;
+  @Nullable
+  private final ToolAction toolAction;
 
   public ToolEntry(Ingredient tool, int damage) {
 
@@ -44,9 +48,15 @@ public class ToolEntry {
 
   public ToolEntry(Ingredient tool, int damage, boolean matchNbt) {
 
+    this(tool, damage, matchNbt, null);
+  }
+
+  public ToolEntry(Ingredient tool, int damage, boolean matchNbt, @Nullable ToolAction toolAction) {
+
     this.tool = tool;
     this.damage = damage;
     this.matchNbt = matchNbt;
+    this.toolAction = toolAction;
 
     ItemStack[] matchingStacks = tool.getItems();
     this.toolItemStacks = new ItemStack[matchingStacks.length];
@@ -76,6 +86,12 @@ public class ToolEntry {
     return this.matchNbt;
   }
 
+  @Nullable
+  public ToolAction getToolAction() {
+
+    return this.toolAction;
+  }
+
   public boolean matches(IToolHandler handler, ItemStack tool) {
 
     for (ItemStack toolItemStack : this.toolItemStacks) {
@@ -86,7 +102,9 @@ public class ToolEntry {
       }
     }
 
-    return false;
+    return !this.matchNbt
+        && this.toolAction != null
+        && handler.canPerformAction(tool, this.toolAction);
   }
 
   /**

@@ -14,14 +14,36 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.common.ToolAction;
+import net.minecraftforge.common.ToolActions;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Map;
 
 public abstract class RecipeSerializerJsonReader<R extends ArtisanRecipe>
     implements IRecipeSerializerJsonReader<R> {
 
   protected final int maxWidth;
   protected final int maxHeight;
+  private static final Map<ResourceLocation, ToolAction> TAG_TOOL_ACTIONS = Map.ofEntries(
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "tools/axes"), ToolActions.AXE_DIG),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "axes"), ToolActions.AXE_DIG),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "tools/pickaxes"), ToolActions.PICKAXE_DIG),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "pickaxes"), ToolActions.PICKAXE_DIG),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "tools/shovels"), ToolActions.SHOVEL_DIG),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "shovels"), ToolActions.SHOVEL_DIG),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "tools/hoes"), ToolActions.HOE_DIG),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "hoes"), ToolActions.HOE_DIG),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "tools/shears"), ToolActions.SHEARS_DIG),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "shears"), ToolActions.SHEARS_DIG),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "tools/swords"), ToolAction.get("cut")),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "swords"), ToolAction.get("cut")),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "tools/knives"), ToolAction.get("cut")),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "knives"), ToolAction.get("cut")),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "tools/hammers"), ToolAction.get("hammer_dig")),
+      Map.entry(ResourceLocation.fromNamespaceAndPath("forge", "hammers"), ToolAction.get("hammer_dig"))
+  );
 
   public RecipeSerializerJsonReader(int maxWidth, int maxHeight) {
 
@@ -125,6 +147,7 @@ public abstract class RecipeSerializerJsonReader<R extends ArtisanRecipe>
         JsonObject toolObject = jsonElement.getAsJsonObject();
         int damage = GsonHelper.getAsInt(toolObject, "damage", 1);
         boolean matchNbt = GsonHelper.getAsBoolean(toolObject, "matchNbt", false);
+        ToolAction toolAction = this.deserializeToolAction(toolObject);
 
         Ingredient tool;
 
@@ -134,11 +157,14 @@ public abstract class RecipeSerializerJsonReader<R extends ArtisanRecipe>
           ItemStack expected = RecipeSerializerHelper.deserializeItem(toolObject);
           tool = Ingredient.of(expected);
 
+        } else if (toolAction != null && !this.hasIngredient(toolObject)) {
+          tool = Ingredient.EMPTY;
+
         } else {
           tool = Ingredient.fromJson(toolObject);
         }
 
-        result.add(new ToolEntry(tool, damage, matchNbt));
+        result.add(new ToolEntry(tool, damage, matchNbt, toolAction));
       }
 
       if (result.size() > 3) {
@@ -147,5 +173,42 @@ public abstract class RecipeSerializerJsonReader<R extends ArtisanRecipe>
     }
 
     return result;
+  }
+
+  private boolean hasIngredient(JsonObject toolObject) {
+
+    return toolObject.has("item")
+        || toolObject.has("tag")
+        || toolObject.has("items");
+  }
+
+  @Nullable
+  private ToolAction deserializeToolAction(JsonObject toolObject) {
+
+    if (toolObject.has("toolAction")) {
+      return RecipeSerializerJsonReader.getToolAction(GsonHelper.getAsString(toolObject, "toolAction"));
+    }
+
+    if (toolObject.has("action")) {
+      return RecipeSerializerJsonReader.getToolAction(GsonHelper.getAsString(toolObject, "action"));
+    }
+
+    if (toolObject.has("tag")) {
+      ResourceLocation tag = ResourceLocation.tryParse(GsonHelper.getAsString(toolObject, "tag"));
+      return tag == null ? null : TAG_TOOL_ACTIONS.get(tag);
+    }
+
+    return null;
+  }
+
+  private static ToolAction getToolAction(String name) {
+
+    return switch (name) {
+      case "tetra:cut" -> ToolAction.get("cut");
+      case "tetra:hammer", "tetra:hammer_dig", "hammer" -> ToolAction.get("hammer_dig");
+      case "tetra:pry" -> ToolAction.get("pry");
+      case "tetra:dowse" -> ToolAction.get("dowse");
+      default -> ToolAction.get(name);
+    };
   }
 }

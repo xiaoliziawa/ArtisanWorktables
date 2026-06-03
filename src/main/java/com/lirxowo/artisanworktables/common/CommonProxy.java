@@ -6,6 +6,7 @@ import com.lirxowo.artisanworktables.IProxy;
 import com.lirxowo.artisanworktables.common.event.*;
 import com.lirxowo.artisanworktables.common.network.*;
 import com.lirxowo.artisanworktables.common.plugin.tconstruct.TinkersToolHandler;
+import com.lirxowo.artisanworktables.common.plugin.tetra.TetraToolHandler;
 import com.lirxowo.artisanworktables.common.recipe.ArtisanRecipe;
 import com.lirxowo.artisanworktables.common.recipe.ArtisanToolHandlers;
 import com.lirxowo.artisanworktables.common.reference.EnumTier;
@@ -91,6 +92,11 @@ public class CommonProxy
     if (ModList.get().isLoaded("tconstruct")) {
       ArtisanToolHandlers.register(new TinkersToolHandler());
       ArtisanWorktablesMod.LOGGER.info("Tinkers' Construct detected; registered Tinkers tool handler.");
+    }
+
+    if (ModList.get().isLoaded("tetra")) {
+      ArtisanToolHandlers.register(new TetraToolHandler());
+      ArtisanWorktablesMod.LOGGER.info("Tetra detected; registered Tetra tool handler.");
     }
   }
 
