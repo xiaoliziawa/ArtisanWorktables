@@ -34,10 +34,11 @@ public class ArtisanRecipeShapeless
       int maximumTier,
       int experienceRequired,
       int levelRequired,
-      boolean consumeExperience
+      boolean consumeExperience,
+      String craftSound
   ) {
 
-    super(tableType, recipeId, group, tools, result, ingredients, secondaryIngredients, consumeSecondaryIngredients, fluidIngredient, extraOutputs, minimumTier, maximumTier, experienceRequired, levelRequired, consumeExperience);
+    super(tableType, recipeId, group, tools, result, ingredients, secondaryIngredients, consumeSecondaryIngredients, fluidIngredient, extraOutputs, minimumTier, maximumTier, experienceRequired, levelRequired, consumeExperience, craftSound);
   }
 
   @Nonnull

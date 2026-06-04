@@ -32,6 +32,8 @@ public class ArtisanWorktablesModCommonConfig {
   public static int fluidCapacityWorkshop;
   public static boolean allowNonToolItemsInToolboxes;
   public static boolean hideIncompatibilityMessage;
+  public static boolean enableMemeCraftSound;
+  public static double memeCraftSoundChance;
 
   public static void bake() {
 
@@ -42,6 +44,8 @@ public class ArtisanWorktablesModCommonConfig {
     fluidCapacityWorkshop = CONFIG.fluidCapacityWorkshop.get();
     allowNonToolItemsInToolboxes = CONFIG.allowNonToolItemsInToolboxes.get();
     hideIncompatibilityMessage = CONFIG.hideIncompatibilityMessage.get();
+    enableMemeCraftSound = CONFIG.enableMemeCraftSound.get();
+    memeCraftSoundChance = CONFIG.memeCraftSoundChance.get();
   }
 
   public static class ConfigCommon {
@@ -53,6 +57,8 @@ public class ArtisanWorktablesModCommonConfig {
     public final ForgeConfigSpec.IntValue fluidCapacityWorkshop;
     public final ForgeConfigSpec.BooleanValue allowNonToolItemsInToolboxes;
     public final ForgeConfigSpec.BooleanValue hideIncompatibilityMessage;
+    public final ForgeConfigSpec.BooleanValue enableMemeCraftSound;
+    public final ForgeConfigSpec.DoubleValue memeCraftSoundChance;
 
     public ConfigCommon(ForgeConfigSpec.Builder builder) {
 
@@ -105,6 +111,22 @@ public class ArtisanWorktablesModCommonConfig {
               "Default: " + false
           )
           .define("hideIncompatibilityMessage", false);
+
+      this.enableMemeCraftSound = builder
+          .comment(
+              "Set to true to enable the default 'meme' craft sound for recipes that don't specify a 'craftSound'.",
+              "When enabled, crafting such a recipe has a chance (see memeCraftSoundChance) to play the meme sound.",
+              "Recipes that explicitly set 'craftSound' are unaffected by this option.",
+              "Default: " + false
+          )
+          .define("enableMemeCraftSound", false);
+
+      this.memeCraftSoundChance = builder
+          .comment(
+              "The probability (0.0 - 1.0) to play the default meme craft sound when enableMemeCraftSound is true.",
+              "Default: " + 0.03
+          )
+          .defineInRange("memeCraftSoundChance", 0.03, 0.0, 1.0);
     }
   }
 }

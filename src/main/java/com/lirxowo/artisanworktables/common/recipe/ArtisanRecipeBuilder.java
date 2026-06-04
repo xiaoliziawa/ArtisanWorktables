@@ -33,6 +33,7 @@ public class ArtisanRecipeBuilder {
   private int experienceRequired;
   private int levelRequired;
   private boolean consumeExperience;
+  private String craftSound;
 
   // Shaped only
   private boolean mirrored;
@@ -54,6 +55,7 @@ public class ArtisanRecipeBuilder {
     this.experienceRequired = 0;
     this.levelRequired = 0;
     this.consumeExperience = true;
+    this.craftSound = "";
 
     // Shaped only
     this.mirrored = true;
@@ -166,6 +168,12 @@ public class ArtisanRecipeBuilder {
     return this;
   }
 
+  public ArtisanRecipeBuilder setCraftSound(String craftSound) {
+
+    this.craftSound = (craftSound == null) ? "" : craftSound;
+    return this;
+  }
+
   public ArtisanRecipeBuilder setMirrored(boolean mirrored) {
 
     this.mirrored = mirrored;
@@ -271,7 +279,8 @@ public class ArtisanRecipeBuilder {
         .append(HashCodeHelper.get(this.fluidIngredient))
         .append(this.experienceRequired)
         .append(this.levelRequired)
-        .append(this.consumeExperience);
+        .append(this.consumeExperience)
+        .append(this.craftSound);
 
     // Extra Chance Outputs
     for (ArtisanRecipe.ExtraOutputChancePair pair : this.extraOutputs) {
@@ -323,7 +332,8 @@ public class ArtisanRecipeBuilder {
         this.maximumTier,
         this.experienceRequired,
         this.levelRequired,
-        this.consumeExperience
+        this.consumeExperience,
+        this.craftSound
     );
   }
 
@@ -348,6 +358,7 @@ public class ArtisanRecipeBuilder {
         this.experienceRequired,
         this.levelRequired,
         this.consumeExperience,
+        this.craftSound,
         this.width,
         this.height
     );

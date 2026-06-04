@@ -38,11 +38,12 @@ public class ArtisanRecipeShaped
       int experienceRequired,
       int levelRequired,
       boolean consumeExperience,
+      String craftSound,
       int width,
       int height
   ) {
 
-    super(tableType, recipeId, group, tools, result, ingredients, secondaryIngredients, consumeSecondaryIngredients, fluidIngredient, extraOutputs, minimumTier, maximumTier, experienceRequired, levelRequired, consumeExperience);
+    super(tableType, recipeId, group, tools, result, ingredients, secondaryIngredients, consumeSecondaryIngredients, fluidIngredient, extraOutputs, minimumTier, maximumTier, experienceRequired, levelRequired, consumeExperience, craftSound);
     this.mirrored = mirrored;
     this.width = width;
     this.height = height;

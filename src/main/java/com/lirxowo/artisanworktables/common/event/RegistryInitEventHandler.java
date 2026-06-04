@@ -1,6 +1,7 @@
 package com.lirxowo.artisanworktables.common.event;
 
 import com.lirxowo.artisanworktables.ArtisanWorktablesMod;
+import com.lirxowo.artisanworktables.common.sound.ModSounds;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
@@ -12,6 +13,7 @@ public class RegistryInitEventHandler {
       ArtisanWorktablesMod.TileEntityTypes.init();
       ArtisanWorktablesMod.ContainerTypes.init();
       ArtisanWorktablesMod.ParticleTypes.init();
+      ModSounds.init();
     });
   }
 }

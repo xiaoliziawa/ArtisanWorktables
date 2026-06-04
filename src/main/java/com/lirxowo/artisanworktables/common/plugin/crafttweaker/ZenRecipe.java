@@ -179,6 +179,13 @@ public class ZenRecipe {
   }
 
   @ZenCodeType.Method
+  public ZenRecipe craftSound(String craftSound) {
+
+    this.builder.setCraftSound(craftSound);
+    return this;
+  }
+
+  @ZenCodeType.Method
   public ZenRecipe output(IItemStack output) {
 
     this.builder.setResult(output.getInternal());

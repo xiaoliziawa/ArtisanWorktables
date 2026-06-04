@@ -244,4 +244,36 @@ ServerEvents.recipes(event => {
   ).tools([
     { item: 'minecraft:iron_pickaxe', damage: 10, matchNbt: true, nbt: '{display:{Name:\'{"text":"Hammer"}\'}}' }
   ])
+
+  // ===========================================================================
+  // craftSound example
+  // The value is a registered sound ID string (vanilla or any mod's sound).
+  // A single left-click craft plays once; a shift-click bulk craft plays only
+  // once total instead of per produced item. The sound is local to the crafter.
+  // ===========================================================================
+
+  // Built-in forge hammer sound (random pitch per craft for a forging feel)
+  art.blacksmith_shaped(
+    'minecraft:iron_block',
+    [
+      'III',
+      'III',
+      'III'
+    ],
+    { I: 'minecraft:iron_ingot' }
+  ).craftSound('artisanworktables:craft.forge_hammer')
+
+  // Level-up sound (shapeless)
+  art.jeweler_shapeless(
+    'minecraft:diamond',
+    ['minecraft:diamond_block']
+  ).craftSound('minecraft:entity.player.levelup')
+
+  // Using this mod's built-in meme sound (you may also omit craftSound entirely:
+  // when omitted, the config options enableMemeCraftSound / memeCraftSoundChance
+  // control whether it randomly plays).
+  art.basic_shapeless(
+    'minecraft:cookie',
+    ['minecraft:wheat', 'minecraft:cocoa_beans']
+  ).craftSound('artisanworktables:craft_meme')
 })

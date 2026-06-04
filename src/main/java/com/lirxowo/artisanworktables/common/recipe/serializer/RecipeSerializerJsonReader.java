@@ -67,6 +67,7 @@ public abstract class RecipeSerializerJsonReader<R extends ArtisanRecipe>
     int experienceRequired = GsonHelper.getAsInt(json, "experienceRequired", 0);
     int levelRequired = GsonHelper.getAsInt(json, "levelRequired", 0);
     boolean consumeExperience = GsonHelper.getAsBoolean(json, "consumeExperience", true);
+    String craftSound = GsonHelper.getAsString(json, "craftSound", "");
 
     builder
         .setRecipeId(recipeId)
@@ -81,7 +82,8 @@ public abstract class RecipeSerializerJsonReader<R extends ArtisanRecipe>
         .setMaximumTier(maximumTier)
         .setExperienceRequired(experienceRequired)
         .setLevelRequired(levelRequired)
-        .setConsumeExperience(consumeExperience);
+        .setConsumeExperience(consumeExperience)
+        .setCraftSound(craftSound);
   }
 
   protected NonNullList<ArtisanRecipe.ExtraOutputChancePair> deserializeExtraOutput(JsonObject json) {

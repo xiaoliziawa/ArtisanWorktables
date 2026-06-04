@@ -6,6 +6,7 @@ import com.lirxowo.artisanworktables.common.network.SCPacketWorktableContainerJo
 import com.lirxowo.artisanworktables.common.recipe.ArtisanRecipe;
 import com.lirxowo.artisanworktables.common.recipe.ICraftingMatrixStackHandler;
 import com.lirxowo.artisanworktables.common.tile.*;
+import com.lirxowo.artisanworktables.common.util.CraftSoundHelper;
 import com.lirxowo.artisanworktables.common.util.ToolValidationHelper;
 import com.lirxowo.oraculum.gui.ContainerBase;
 import net.minecraft.world.entity.player.Player;
@@ -551,14 +552,25 @@ public abstract class BaseContainer
   @Override
   public void clicked(int slotId, int dragType, @Nonnull ClickType clickType, @Nonnull Player player) {
 
+    boolean resultInteraction = (slotId == this.slotIndexResult);
+
+    ArtisanRecipe recipe = resultInteraction ? this.tile.getRecipe(player) : null;
+    int craftCountBefore = this.tile.getCraftCounter();
+
     if (slotId == this.slotIndexResult
         || (slotId >= this.slotIndexSecondaryOutputStart && slotId <= this.slotIndexSecondaryOutputEnd)) {
       // prevent deleting half of the stack
       super.clicked(slotId, 0, clickType, player);
-      return;
+    } else {
+      super.clicked(slotId, dragType, clickType, player);
     }
 
-    super.clicked(slotId, dragType, clickType, player);
+    if (resultInteraction
+        && recipe != null
+        && this.world.isClientSide
+        && this.tile.getCraftCounter() != craftCountBefore) {
+      CraftSoundHelper.playCraftSound(player, recipe, this.tile.getBlockPos());
+    }
   }
 
   @Nonnull

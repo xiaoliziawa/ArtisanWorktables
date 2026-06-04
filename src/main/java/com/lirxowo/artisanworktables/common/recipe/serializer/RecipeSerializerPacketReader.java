@@ -29,6 +29,7 @@ public abstract class RecipeSerializerPacketReader<R extends ArtisanRecipe>
     int experienceRequired = buffer.readInt();
     int levelRequired = buffer.readInt();
     boolean consumeExperience = buffer.readBoolean();
+    String craftSound = buffer.readUtf();
 
     builder
         .setRecipeId(recipeId)
@@ -44,7 +45,8 @@ public abstract class RecipeSerializerPacketReader<R extends ArtisanRecipe>
         .setMaximumTier(maximumTier)
         .setExperienceRequired(experienceRequired)
         .setLevelRequired(levelRequired)
-        .setConsumeExperience(consumeExperience);
+        .setConsumeExperience(consumeExperience)
+        .setCraftSound(craftSound);
   }
 
   protected NonNullList<ArtisanRecipe.ExtraOutputChancePair> readExtraOutputs(FriendlyByteBuf buffer) {

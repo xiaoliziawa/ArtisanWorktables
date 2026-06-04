@@ -64,6 +64,8 @@ public abstract class BaseBlockEntity
 
   protected boolean requiresRecipeUpdate;
 
+  private int craftCounter;
+
   private final LazyOptional<FluidTank> fluidCapability = LazyOptional.of(() -> this.tank);
 
   // ---------------------------------------------------------------------------
@@ -374,8 +376,14 @@ public abstract class BaseBlockEntity
     }
 
     this.getCraftHandler().doCraft(this.level, this.getBlockPos(), player, recipe, this.getInventory(player), null);
+    this.craftCounter++;
 
     this.setChanged();
+  }
+
+  public int getCraftCounter() {
+
+    return this.craftCounter;
   }
 
   private CraftHandler getCraftHandler() {

@@ -28,6 +28,7 @@ public abstract class RecipeSerializerPacketWriter<R extends ArtisanRecipe>
     buffer.writeInt(recipe.getExperienceRequired());
     buffer.writeInt(recipe.getLevelRequired());
     buffer.writeBoolean(recipe.consumeExperience());
+    buffer.writeUtf(recipe.getCraftSound());
   }
 
   protected void writeExtraOutputs(FriendlyByteBuf buffer, NonNullList<ArtisanRecipe.ExtraOutputChancePair> extraOutputs) {

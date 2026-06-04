@@ -217,3 +217,37 @@ Recipe.type(Type.MASON)
     .tool(hammer, 10, true)
     .output(<item:minecraft:cobblestone>)
     .register("mason_hammer_cobble");
+
+// ===========================================================================
+// craftSound example
+// The value is a registered sound ID string (vanilla or any mod's sound).
+// A single left-click craft plays once; a shift-click bulk craft plays only
+// once total instead of per produced item. The sound is local to the crafter.
+// ===========================================================================
+
+// Built-in forge hammer sound (random pitch per craft for a forging feel)
+Recipe.type(Type.BLACKSMITH)
+    .shaped([
+        [<item:minecraft:iron_ingot>, <item:minecraft:iron_ingot>, <item:minecraft:iron_ingot>],
+        [<item:minecraft:iron_ingot>, <item:minecraft:iron_ingot>, <item:minecraft:iron_ingot>],
+        [<item:minecraft:iron_ingot>, <item:minecraft:iron_ingot>, <item:minecraft:iron_ingot>]
+    ])
+    .craftSound("artisanworktables:craft.forge_hammer")
+    .output(<item:minecraft:iron_block>)
+    .register("blacksmith_iron_block_sound");
+
+// Level-up sound (shapeless)
+Recipe.type(Type.JEWELER)
+    .shapeless([<item:minecraft:diamond_block>])
+    .craftSound("minecraft:entity.player.levelup")
+    .output(<item:minecraft:diamond>)
+    .register("jeweler_diamond_sound");
+
+// Using this mod's built-in meme sound (you may also omit craftSound entirely:
+// when omitted, the config options enableMemeCraftSound / memeCraftSoundChance
+// control whether it randomly plays).
+Recipe.type(Type.BASIC)
+    .shapeless([<item:minecraft:wheat>, <item:minecraft:cocoa_beans>])
+    .craftSound("artisanworktables:craft_meme")
+    .output(<item:minecraft:cookie>)
+    .register("basic_cookie_meme");

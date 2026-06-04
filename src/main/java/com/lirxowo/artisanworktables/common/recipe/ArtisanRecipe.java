@@ -32,6 +32,7 @@ public abstract class ArtisanRecipe
   protected final int experienceRequired;
   protected final int levelRequired;
   protected final boolean consumeExperience;
+  protected final String craftSound;
 
   /* package */ ArtisanRecipe(
       EnumType tableType,
@@ -48,7 +49,8 @@ public abstract class ArtisanRecipe
       int maximumTier,
       int experienceRequired,
       int levelRequired,
-      boolean consumeExperience
+      boolean consumeExperience,
+      String craftSound
   ) {
 
     this.tableType = tableType;
@@ -66,6 +68,7 @@ public abstract class ArtisanRecipe
     this.experienceRequired = experienceRequired;
     this.levelRequired = levelRequired;
     this.consumeExperience = consumeExperience;
+    this.craftSound = craftSound;
   }
 
   // ---------------------------------------------------------------------------
@@ -137,6 +140,11 @@ public abstract class ArtisanRecipe
   public boolean consumeExperience() {
 
     return this.consumeExperience;
+  }
+
+  public String getCraftSound() {
+
+    return this.craftSound;
   }
 
   // ---------------------------------------------------------------------------

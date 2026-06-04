@@ -60,5 +60,7 @@
   "jei.artisanworktables.secondary.not_consumed": "Secondary Ingredient: Not Consumed",
   "jei.artisanworktables.secondary.status.consumed": "Secondary: Consumed",
   "jei.artisanworktables.secondary.status.not_consumed": "Secondary: Not Consumed",
-  "jei.artisanworktables.transfer.missing_tool": "Missing a required tool"
+  "jei.artisanworktables.transfer.missing_tool": "Missing a required tool",
+  "subtitles.artisanworktables.craft_meme": "Crafted",
+  "subtitles.artisanworktables.craft": "Crafting"
 }

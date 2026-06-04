@@ -109,6 +109,7 @@ public class CommonProxy
     eventBus.register(new MenuTypeRegistrationEventHandler());
     eventBus.register(new RecipeSerializerRegistrationEventHandler(this.registeredSerializersShaped, this.registeredSerializersShapeless));
     eventBus.register(new ParticleTypeRegistrationEventHandler());
+    eventBus.register(new SoundEventRegistrationEventHandler());
     eventBus.register(new CreativeTabRegistrationEventHandler());
     eventBus.register(new RegistryInitEventHandler());
   }
