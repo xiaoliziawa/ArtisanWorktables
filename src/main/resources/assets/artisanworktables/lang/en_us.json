@@ -62,5 +62,9 @@
   "jei.artisanworktables.secondary.status.not_consumed": "Secondary: Not Consumed",
   "jei.artisanworktables.transfer.missing_tool": "Missing a required tool",
   "subtitles.artisanworktables.craft_meme": "Crafted",
-  "subtitles.artisanworktables.craft": "Crafting"
+  "subtitles.artisanworktables.craft": "Crafting",
+  "commands.artisanworktables.screenshot.empty_hand": "Your main hand is empty.",
+  "commands.artisanworktables.screenshot.unknown_item": "Unknown item: %s",
+  "commands.artisanworktables.screenshot.success": "Saved item screenshot: %s",
+  "commands.artisanworktables.screenshot.failure": "Failed to save item screenshot: %s"
 }

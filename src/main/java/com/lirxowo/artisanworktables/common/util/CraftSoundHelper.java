@@ -18,10 +18,6 @@ public final class CraftSoundHelper {
   private static final float BASE_PITCH = 1.0f;
   private static final float PITCH_VARIANCE = 0.2f;
 
-  private CraftSoundHelper() {
-
-  }
-
   public static void playCraftSound(Player player, ArtisanRecipe recipe, BlockPos pos) {
 
     Level level = player.level();

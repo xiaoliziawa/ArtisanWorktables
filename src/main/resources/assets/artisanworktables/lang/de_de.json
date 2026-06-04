@@ -62,5 +62,9 @@
   "jei.artisanworktables.secondary.status.not_consumed": "Nebenmaterial: Bleibt",
   "jei.artisanworktables.transfer.missing_tool": "Benötigtes Werkzeug fehlt",
   "subtitles.artisanworktables.craft_meme": "Hergestellt",
-  "subtitles.artisanworktables.craft": "Schmieden"
+  "subtitles.artisanworktables.craft": "Schmieden",
+  "commands.artisanworktables.screenshot.empty_hand": "Deine Haupthand ist leer.",
+  "commands.artisanworktables.screenshot.unknown_item": "Unbekannter Gegenstand: %s",
+  "commands.artisanworktables.screenshot.success": "Gegenstands-Screenshot gespeichert: %s",
+  "commands.artisanworktables.screenshot.failure": "Gegenstands-Screenshot fehlgeschlagen: %s"
 }

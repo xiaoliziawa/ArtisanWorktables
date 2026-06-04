@@ -62,5 +62,9 @@
   "jei.artisanworktables.secondary.status.not_consumed": "副材料：不消耗",
   "jei.artisanworktables.transfer.missing_tool": "缺少所需工具",
   "subtitles.artisanworktables.craft_meme": "合成",
-  "subtitles.artisanworktables.craft": "锻造"
+  "subtitles.artisanworktables.craft": "锻造",
+  "commands.artisanworktables.screenshot.empty_hand": "你的主手是空的。",
+  "commands.artisanworktables.screenshot.unknown_item": "未知物品：%s",
+  "commands.artisanworktables.screenshot.success": "已保存物品截图：%s",
+  "commands.artisanworktables.screenshot.failure": "保存物品截图失败：%s"
 }

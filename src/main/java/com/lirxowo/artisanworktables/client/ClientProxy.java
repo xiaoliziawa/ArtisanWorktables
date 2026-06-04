@@ -1,5 +1,6 @@
 package com.lirxowo.artisanworktables.client;
 
+import com.lirxowo.artisanworktables.client.event.ClientCommandRegistrationEventHandler;
 import com.lirxowo.artisanworktables.client.event.ClientSetupEventHandler;
 import com.lirxowo.artisanworktables.client.event.ParticleFactoryRegisterEventHandler;
 import com.lirxowo.artisanworktables.common.CommonProxy;
@@ -20,6 +21,14 @@ public class ClientProxy
 
     eventBus.register(new ClientSetupEventHandler());
     eventBus.register(new ParticleFactoryRegisterEventHandler());
+  }
+
+  @Override
+  public void registerForgeEventHandlers(IEventBus eventBus) {
+
+    super.registerForgeEventHandlers(eventBus);
+
+    eventBus.register(new ClientCommandRegistrationEventHandler());
   }
 
   @Override

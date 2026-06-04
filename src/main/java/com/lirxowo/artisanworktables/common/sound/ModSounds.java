@@ -25,10 +25,6 @@ public final class ModSounds {
 
   public static SoundEvent CRAFT_MEME;
 
-  private ModSounds() {
-
-  }
-
   public static ResourceLocation craftSoundId(String name) {
 
     return ResourceLocation.fromNamespaceAndPath(Reference.MOD_ID, "craft." + name);
