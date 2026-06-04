@@ -59,6 +59,8 @@ public class GuiElementFluidTankSmall
         ReferenceTexture.TEXTURE_FLUID_OVERLAY.getWidth(),
         ReferenceTexture.TEXTURE_FLUID_OVERLAY.getHeight()
     );
+
+    RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
   }
 
 }

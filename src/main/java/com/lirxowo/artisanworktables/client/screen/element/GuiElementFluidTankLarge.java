@@ -6,7 +6,6 @@ import com.lirxowo.oraculum.gui.GuiHelper;
 import com.lirxowo.oraculum.gui.element.IGuiElementClickable;
 import com.lirxowo.oraculum.gui.element.IGuiElementTooltipProvider;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.core.BlockPos;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -73,6 +72,8 @@ public class GuiElementFluidTankLarge
         ReferenceTexture.TEXTURE_FLUID_OVERLAY.getWidth(),
         ReferenceTexture.TEXTURE_FLUID_OVERLAY.getHeight()
     );
+
+    RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
   }
 
 }
