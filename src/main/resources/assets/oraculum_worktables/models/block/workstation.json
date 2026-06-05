@@ -2,8 +2,8 @@
   "parent": "block/block",
   "ambientocclusion": false,
   "textures": {
-    "bottom": "oraculumworktables:block/workstation_bottom",
-    "base": "oraculumworktables:block/workstation_base"
+    "bottom": "oraculum_worktables:block/workstation_bottom",
+    "base": "oraculum_worktables:block/workstation_base"
   },
   "elements": [
     {

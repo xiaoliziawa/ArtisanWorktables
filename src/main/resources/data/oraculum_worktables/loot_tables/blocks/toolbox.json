@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "oraculumworktables:toolbox",
+          "name": "oraculum_worktables:toolbox",
           "functions": [
             {
               "function": "minecraft:copy_name",
@@ -18,7 +18,7 @@
               "entries": [
                 {
                   "type": "minecraft:dynamic",
-                  "name": "oraculumworktables:contents"
+                  "name": "oraculum_worktables:contents"
                 }
               ]
             }

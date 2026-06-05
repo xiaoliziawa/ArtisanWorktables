@@ -60,9 +60,9 @@ Scripts go in the `scripts/` directory with the `.zs` extension.
 ### 2.1 Entry Point and Chained Syntax
 
 ```zenscript
-import mods.oraculumworktables.Recipe;
-import mods.oraculumworktables.Type;
-import mods.oraculumworktables.Tier;
+import mods.oraculum_worktables.Recipe;
+import mods.oraculum_worktables.Type;
+import mods.oraculum_worktables.Tier;
 
 // Start with Recipe.type(tableType), chain the options, and finish with register()
 Recipe.type(Type.BLACKSMITH)
@@ -101,9 +101,9 @@ Recipe.type(Type.BLACKSMITH)
 ### 2.3 Full Example
 
 ```zenscript
-import mods.oraculumworktables.Recipe;
-import mods.oraculumworktables.Type;
-import mods.oraculumworktables.Tier;
+import mods.oraculum_worktables.Recipe;
+import mods.oraculum_worktables.Type;
+import mods.oraculum_worktables.Tier;
 
 // Blacksmith shaped recipe: requires a diamond pickaxe (costs 10 durability), consumes 1000mB water,
 // restricted to workstation tier and above, requires level 5, and has a 50% chance of an extra diamond.
@@ -140,11 +140,11 @@ Scripts go in the `kubejs/server_scripts/` directory with the `.js` extension. R
 Each table type has two recipe functions:
 
 ```
-event.recipes.oraculumworktables.<tableType>_shaped(result, pattern, key)
-event.recipes.oraculumworktables.<tableType>_shapeless(result, ingredients)
+event.recipes.oraculum_worktables.<tableType>_shaped(result, pattern, key)
+event.recipes.oraculum_worktables.<tableType>_shapeless(result, ingredients)
 ```
 
-For example, `event.recipes.oraculumworktables.blacksmith_shaped(...)`, `event.recipes.oraculumworktables.chef_shapeless(...)`.
+For example, `event.recipes.oraculum_worktables.blacksmith_shaped(...)`, `event.recipes.oraculum_worktables.chef_shapeless(...)`.
 
 ### 3.2 Constructor Parameters
 
@@ -200,7 +200,7 @@ After construction you can chain the following methods (method names match the f
 ServerEvents.recipes(event => {
 
   // Blacksmith shaped recipe
-  event.recipes.oraculumworktables.blacksmith_shaped(
+  event.recipes.oraculum_worktables.blacksmith_shaped(
     'minecraft:iron_block',
     [
       'III',
@@ -223,7 +223,7 @@ ServerEvents.recipes(event => {
     .mirrored(true)
 
   // Chef shapeless recipe
-  event.recipes.oraculumworktables.chef_shapeless(
+  event.recipes.oraculum_worktables.chef_shapeless(
     'minecraft:bread',
     ['minecraft:wheat', 'minecraft:wheat', 'minecraft:wheat']
   )
@@ -237,7 +237,7 @@ KubeJS can remove recipes by recipe type:
 ```js
 ServerEvents.recipes(event => {
   // Remove all shaped recipes for a table type
-  event.remove({ type: 'oraculumworktables:blacksmith_shaped' })
+  event.remove({ type: 'oraculum_worktables:blacksmith_shaped' })
   // Remove by output
   event.remove({ output: 'minecraft:iron_block' })
 })
@@ -265,7 +265,7 @@ ServerEvents.recipes(event => {
 
 > **Craft sound:** the value is a registered sound ID string (vanilla or any mod, e.g. `minecraft:block.anvil.use`). It plays once per craft gesture — a shift-click bulk craft plays it only once — and only locally for the crafting player. When `craftSound` is set, each play is given a random higher/lower pitch for a forging feel (the meme fallback is not pitch-shifted). If a recipe does NOT set `craftSound`, an optional built-in "meme" sound may play on craft; this fallback is config-gated (`enableMemeCraftSound`, default `false`; `memeCraftSoundChance`, default `0.03`) and does not affect recipes that set `craftSound` explicitly.
 >
-> **Built-in sounds:** the mod ships a set of forging-style sounds you can reference directly: `oraculumworktables:craft.forge_hammer`, `craft.file`, `craft.saw`, `craft.chainsaw`, `craft.macerator`, `craft.mortar`, `craft.screwdriver`, `craft.wirecutter`, `craft.wrench`, `craft.portal_opening`, plus the easter-egg `oraculumworktables:craft_meme`.
+> **Built-in sounds:** the mod ships a set of forging-style sounds you can reference directly: `oraculum_worktables:craft.forge_hammer`, `craft.file`, `craft.saw`, `craft.chainsaw`, `craft.macerator`, `craft.mortar`, `craft.screwdriver`, `craft.wirecutter`, `craft.wrench`, `craft.portal_opening`, plus the easter-egg `oraculum_worktables:craft_meme`.
 
 ---
 
@@ -305,7 +305,7 @@ Recipe.type(Type.BLACKSMITH)
 `key` / `ingredients` / `secondaryIngredients` use `'#namespace:path'`; `tools`, because they pass through native JSON, use `{ tag: 'namespace:path' }` (**without the `#`**):
 
 ```js
-event.recipes.oraculumworktables.blacksmith_shaped(
+event.recipes.oraculum_worktables.blacksmith_shaped(
   'minecraft:anvil',
   ['II', 'II'],
   { I: '#forge:ingots/iron' }                            // key by tag
@@ -314,7 +314,7 @@ event.recipes.oraculumworktables.blacksmith_shaped(
   .secondaryIngredients(['#forge:gems/diamond'])         // secondary ingredient by tag
   .consumeSecondaryIngredients(false)
 
-event.recipes.oraculumworktables.basic_shapeless(
+event.recipes.oraculum_worktables.basic_shapeless(
   Item.of('minecraft:stick', 4),
   ['#minecraft:logs']                                    // ingredients by tag
 )
@@ -355,14 +355,14 @@ Recipe.type(Type.MAGE)
 
 ```js
 // Output an enchanted book with Sharpness V
-event.recipes.oraculumworktables.mage_shaped(
+event.recipes.oraculum_worktables.mage_shaped(
   Item.of('minecraft:enchanted_book', '{StoredEnchantments:[{id:"minecraft:sharpness",lvl:5s}]}'),
   ['LBL', 'LEL'],
   { L: 'minecraft:lapis_lazuli', B: 'minecraft:book', E: 'minecraft:experience_bottle' }
 ).levelRequired(5)
 
 // To require "a specific NBT item must be placed" as an ingredient, explicitly use strongNBT (strict) or weakNBT (partial)
-event.recipes.oraculumworktables.basic_shapeless(
+event.recipes.oraculum_worktables.basic_shapeless(
   'minecraft:book',
   [Item.of('minecraft:enchanted_book', '{StoredEnchantments:[{id:"minecraft:sharpness",lvl:5s}]}').strongNBT()]
 )

@@ -61,7 +61,7 @@ public final class ScreenshotCommand {
     ItemStack stack = minecraft.player.getMainHandItem();
 
     if (stack.isEmpty()) {
-      sendFailure(Component.translatable("commands.oraculumworktables.screenshot.empty_hand"));
+      sendFailure(Component.translatable("commands.oraculum_worktables.screenshot.empty_hand"));
       return 0;
     }
 
@@ -73,7 +73,7 @@ public final class ScreenshotCommand {
     Optional<Item> item = BuiltInRegistries.ITEM.getOptional(itemId);
 
     if (item.isEmpty() || item.get() == Items.AIR) {
-      sendFailure(Component.translatable("commands.oraculumworktables.screenshot.unknown_item", itemId.toString()));
+      sendFailure(Component.translatable("commands.oraculum_worktables.screenshot.unknown_item", itemId.toString()));
       return 0;
     }
 
@@ -91,14 +91,14 @@ public final class ScreenshotCommand {
 
     } catch (Exception e) {
       OraculumWorktablesMod.LOGGER.error("Failed to render item screenshot for " + itemId, e);
-      sendFailure(Component.translatable("commands.oraculumworktables.screenshot.failure", e.getMessage()));
+      sendFailure(Component.translatable("commands.oraculum_worktables.screenshot.failure", e.getMessage()));
       return 0;
     }
 
     Component fileLink = Component.literal(outFile.getName())
         .withStyle(ChatFormatting.UNDERLINE)
         .withStyle(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, outFile.getAbsolutePath())));
-    sendSuccess(Component.translatable("commands.oraculumworktables.screenshot.success", fileLink));
+    sendSuccess(Component.translatable("commands.oraculum_worktables.screenshot.success", fileLink));
     return 1;
   }
 

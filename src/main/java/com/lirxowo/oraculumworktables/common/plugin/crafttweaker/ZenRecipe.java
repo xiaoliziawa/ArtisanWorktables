@@ -25,7 +25,7 @@ import org.apache.logging.log4j.Logger;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.oraculumworktables.Recipe")
+@ZenCodeType.Name("mods.oraculum_worktables.Recipe")
 public class ZenRecipe {
 
   private static final Logger LOGGER = CraftTweakerAPI.getLogger(OraculumWorktablesMod.MOD_ID);

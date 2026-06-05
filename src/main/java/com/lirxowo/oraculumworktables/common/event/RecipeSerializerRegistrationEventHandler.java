@@ -49,7 +49,7 @@ public class RecipeSerializerRegistrationEventHandler {
       );
       this.registeredSerializersShaped.put(type, shapedSerializer);
       event.register(Registries.RECIPE_SERIALIZER,
-          ResourceLocation.fromNamespaceAndPath("oraculumworktables", name + "_shaped"),
+          ResourceLocation.fromNamespaceAndPath(Reference.MOD_ID, name + "_shaped"),
           () -> shapedSerializer);
 
       ArtisanRecipeSerializer<ArtisanRecipeShapeless> shapelessSerializer = new ArtisanRecipeSerializer<>(
@@ -59,7 +59,7 @@ public class RecipeSerializerRegistrationEventHandler {
       );
       this.registeredSerializersShapeless.put(type, shapelessSerializer);
       event.register(Registries.RECIPE_SERIALIZER,
-          ResourceLocation.fromNamespaceAndPath("oraculumworktables", name + "_shapeless"),
+          ResourceLocation.fromNamespaceAndPath(Reference.MOD_ID, name + "_shapeless"),
           () -> shapelessSerializer);
     }
   }

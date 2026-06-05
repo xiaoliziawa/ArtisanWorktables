@@ -66,13 +66,13 @@ public class SCPacketIncompatible
 
     String modList = String.join(", ", message.modIdList.toArray(new String[0]));
 
-    String warningString = I18n.get("gui.oraculumworktables.warning");
+    String warningString = I18n.get("gui.oraculum_worktables.warning");
 
     minecraft.setScreen(
         new ConfirmScreen(
             (result) -> minecraft.setScreen(null),
             Component.literal(warningString).withStyle(ChatFormatting.RED),
-            Component.translatable("gui.oraculumworktables.incompatibility", modList),
+            Component.translatable("gui.oraculum_worktables.incompatibility", modList),
             Component.translatable("gui.proceed"),
             Component.translatable("gui.cancel")
         )

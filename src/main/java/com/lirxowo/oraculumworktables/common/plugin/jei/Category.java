@@ -67,7 +67,7 @@ public class Category
       }
 
       if (mouseX >= x && mouseX <= x + 9 && mouseY >= y && mouseY <= y + 9) {
-        tooltip.add(Component.translatable("jei.oraculumworktables.tooltip.shapeless.recipe"));
+        tooltip.add(Component.translatable("jei.oraculum_worktables.tooltip.shapeless.recipe"));
       }
     }
   }

@@ -60,9 +60,9 @@
 ### 2.1 入口与链式写法
 
 ```zenscript
-import mods.oraculumworktables.Recipe;
-import mods.oraculumworktables.Type;
-import mods.oraculumworktables.Tier;
+import mods.oraculum_worktables.Recipe;
+import mods.oraculum_worktables.Type;
+import mods.oraculum_worktables.Tier;
 
 // 通过 Recipe.type(桌型) 开始，链式调用各项，最后 register()
 Recipe.type(Type.BLACKSMITH)
@@ -101,9 +101,9 @@ Recipe.type(Type.BLACKSMITH)
 ### 2.3 完整示例
 
 ```zenscript
-import mods.oraculumworktables.Recipe;
-import mods.oraculumworktables.Type;
-import mods.oraculumworktables.Tier;
+import mods.oraculum_worktables.Recipe;
+import mods.oraculum_worktables.Type;
+import mods.oraculum_worktables.Tier;
 
 // 铁匠有序配方：需要钻石镐（消耗 10 耐久），消耗 1000mB 水，
 // 限定工作站及以上等级，需 5 级经验，并有 50% 概率额外产出钻石。
@@ -140,11 +140,11 @@ Recipe.type(Type.CHEF)
 每个桌型有两个配方函数：
 
 ```
-event.recipes.oraculumworktables.<桌型>_shaped(result, pattern, key)
-event.recipes.oraculumworktables.<桌型>_shapeless(result, ingredients)
+event.recipes.oraculum_worktables.<桌型>_shaped(result, pattern, key)
+event.recipes.oraculum_worktables.<桌型>_shapeless(result, ingredients)
 ```
 
-例如 `event.recipes.oraculumworktables.blacksmith_shaped(...)`、`event.recipes.oraculumworktables.chef_shapeless(...)`。
+例如 `event.recipes.oraculum_worktables.blacksmith_shaped(...)`、`event.recipes.oraculum_worktables.chef_shapeless(...)`。
 
 ### 3.2 构造参数
 
@@ -200,7 +200,7 @@ event.recipes.oraculumworktables.<桌型>_shapeless(result, ingredients)
 ServerEvents.recipes(event => {
 
   // 铁匠有序配方
-  event.recipes.oraculumworktables.blacksmith_shaped(
+  event.recipes.oraculum_worktables.blacksmith_shaped(
     'minecraft:iron_block',
     [
       'III',
@@ -223,7 +223,7 @@ ServerEvents.recipes(event => {
     .mirrored(true)
 
   // 厨师无序配方
-  event.recipes.oraculumworktables.chef_shapeless(
+  event.recipes.oraculum_worktables.chef_shapeless(
     'minecraft:bread',
     ['minecraft:wheat', 'minecraft:wheat', 'minecraft:wheat']
   )
@@ -237,7 +237,7 @@ KubeJS 可按配方类型移除：
 ```js
 ServerEvents.recipes(event => {
   // 移除某桌型的全部有序配方
-  event.remove({ type: 'oraculumworktables:blacksmith_shaped' })
+  event.remove({ type: 'oraculum_worktables:blacksmith_shaped' })
   // 按输出移除
   event.remove({ output: 'minecraft:iron_block' })
 })
@@ -280,17 +280,17 @@ ServerEvents.recipes(event => {
 
 | 音效 ID | 说明 |
 |---------|------|
-| `oraculumworktables:craft.forge_hammer` | 锻锤 |
-| `oraculumworktables:craft.file` | 锉刀 |
-| `oraculumworktables:craft.saw` | 锯 |
-| `oraculumworktables:craft.chainsaw` | 链锯 |
-| `oraculumworktables:craft.macerator` | 研磨机 |
-| `oraculumworktables:craft.mortar` | 研钵 |
-| `oraculumworktables:craft.screwdriver` | 螺丝刀 |
-| `oraculumworktables:craft.wirecutter` | 剪线钳 |
-| `oraculumworktables:craft.wrench` | 扳手 |
-| `oraculumworktables:craft.portal_opening` | 传送门开启 |
-| `oraculumworktables:craft_meme` | 内置彩蛋音效 |
+| `oraculum_worktables:craft.forge_hammer` | 锻锤 |
+| `oraculum_worktables:craft.file` | 锉刀 |
+| `oraculum_worktables:craft.saw` | 锯 |
+| `oraculum_worktables:craft.chainsaw` | 链锯 |
+| `oraculum_worktables:craft.macerator` | 研磨机 |
+| `oraculum_worktables:craft.mortar` | 研钵 |
+| `oraculum_worktables:craft.screwdriver` | 螺丝刀 |
+| `oraculum_worktables:craft.wirecutter` | 剪线钳 |
+| `oraculum_worktables:craft.wrench` | 扳手 |
+| `oraculum_worktables:craft.portal_opening` | 传送门开启 |
+| `oraculum_worktables:craft_meme` | 内置彩蛋音效 |
 
 CraftTweaker：
 
@@ -298,23 +298,23 @@ CraftTweaker：
 Recipe.type(Type.WORKTABLE)
     .shaped([[<item:minecraft:stick>]])
     .output(<item:minecraft:torch>)
-    .craftSound("oraculumworktables:craft.forge_hammer")
+    .craftSound("oraculum_worktables:craft.forge_hammer")
     .register();
 ```
 
 KubeJS：
 
 ```js
-event.recipes.oraculumworktables.worktable_shaped(
+event.recipes.oraculum_worktables.worktable_shaped(
   'minecraft:torch',
   ['S'],
   { S: 'minecraft:stick' }
-).craftSound('oraculumworktables:craft.forge_hammer')
+).craftSound('oraculum_worktables:craft.forge_hammer')
 ```
 
 ### 5.1 未指定 craftSound 时的彩蛋音效
 
-若配方未指定 `craftSound`，则在合成时有一定概率播放内置的彩蛋音效（meme）。该行为由配置文件 `oraculumworktables/oraculumworktables-common.toml` 控制：
+若配方未指定 `craftSound`，则在合成时有一定概率播放内置的彩蛋音效（meme）。该行为由配置文件 `oraculum_worktables/oraculum_worktables-common.toml` 控制：
 
 | 配置项 | 含义 | 默认值 |
 |--------|------|--------|
@@ -361,7 +361,7 @@ Recipe.type(Type.BLACKSMITH)
 `key` / `ingredients` / `secondaryIngredients` 用 `'#命名空间:路径'`；`tools` 因走原生 JSON 透传，用 `{ tag: '命名空间:路径' }`（**不带 `#`**）：
 
 ```js
-event.recipes.oraculumworktables.blacksmith_shaped(
+event.recipes.oraculum_worktables.blacksmith_shaped(
   'minecraft:anvil',
   ['II', 'II'],
   { I: '#forge:ingots/iron' }                            // key 用 tag
@@ -370,7 +370,7 @@ event.recipes.oraculumworktables.blacksmith_shaped(
   .secondaryIngredients(['#forge:gems/diamond'])         // 副材料用 tag
   .consumeSecondaryIngredients(false)
 
-event.recipes.oraculumworktables.basic_shapeless(
+event.recipes.oraculum_worktables.basic_shapeless(
   Item.of('minecraft:stick', 4),
   ['#minecraft:logs']                                    // ingredients 用 tag
 )
@@ -411,14 +411,14 @@ Recipe.type(Type.MAGE)
 
 ```js
 // 输出一本带锋利 V 的附魔书
-event.recipes.oraculumworktables.mage_shaped(
+event.recipes.oraculum_worktables.mage_shaped(
   Item.of('minecraft:enchanted_book', '{StoredEnchantments:[{id:"minecraft:sharpness",lvl:5s}]}'),
   ['LBL', 'LEL'],
   { L: 'minecraft:lapis_lazuli', B: 'minecraft:book', E: 'minecraft:experience_bottle' }
 ).levelRequired(5)
 
 // 要求“必须放入特定 NBT 物品”作为材料时，须显式 strongNBT（严格）或 weakNBT（部分）
-event.recipes.oraculumworktables.basic_shapeless(
+event.recipes.oraculum_worktables.basic_shapeless(
   'minecraft:book',
   [Item.of('minecraft:enchanted_book', '{StoredEnchantments:[{id:"minecraft:sharpness",lvl:5s}]}').strongNBT()]
 )

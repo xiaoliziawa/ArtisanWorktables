@@ -35,7 +35,7 @@ public class BlockEntityRegistrationEventHandler {
     this.register(event, EnumTier.WORKSHOP);
 
     event.register(Registries.BLOCK_ENTITY_TYPE,
-        ResourceLocation.fromNamespaceAndPath("oraculumworktables", "toolbox"),
+        ResourceLocation.fromNamespaceAndPath(OraculumWorktablesMod.MOD_ID, "toolbox"),
         () -> BlockEntityType.Builder.of(ToolboxBlockEntity::new,
             OraculumWorktablesMod.Blocks.TOOLBOX,
             OraculumWorktablesMod.Blocks.MECHANICAL_TOOLBOX).build(null));
@@ -46,7 +46,7 @@ public class BlockEntityRegistrationEventHandler {
     Block[] blockArray = blockList.toArray(new Block[0]);
 
     event.register(Registries.BLOCK_ENTITY_TYPE,
-        ResourceLocation.fromNamespaceAndPath("oraculumworktables", tier.getName()),
+        ResourceLocation.fromNamespaceAndPath(OraculumWorktablesMod.MOD_ID, tier.getName()),
         () -> {
           switch (tier) {
             case WORKTABLE:

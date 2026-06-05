@@ -1,5 +1,6 @@
 package com.lirxowo.oraculumworktables.common.container;
 
+import com.lirxowo.oraculumworktables.OraculumWorktablesMod;
 import com.lirxowo.oraculumworktables.common.reference.EnumTier;
 import com.lirxowo.oraculumworktables.common.reference.EnumType;
 import net.minecraft.world.entity.player.Player;
@@ -7,7 +8,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 
@@ -33,7 +33,9 @@ public class ContainerProvider
   @Override
   public Component getDisplayName() {
 
-    return Component.translatable("block.oraculumworktables." + this.tier.getName() + "_" + this.type.getName());
+    return Component.translatable(
+        "block." + OraculumWorktablesMod.MOD_ID + "." + this.tier.getName() + "_" + this.type.getName()
+    );
   }
 
   @Override

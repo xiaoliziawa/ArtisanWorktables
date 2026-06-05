@@ -1,9 +1,9 @@
 {
   "parent": "block/block",
   "textures": {
-    "horizontal": "oraculumworktables:block/toolbox",
-    "vertical": "oraculumworktables:block/toolbox_top",
-    "particle": "oraculumworktables:block/toolbox"
+    "horizontal": "oraculum_worktables:block/toolbox",
+    "vertical": "oraculum_worktables:block/toolbox_top",
+    "particle": "oraculum_worktables:block/toolbox"
   },
   "elements": [
     {

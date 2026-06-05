@@ -51,9 +51,9 @@ public class BlockRegistrationEventHandler {
     OraculumWorktablesMod.Blocks.TOOLBOX = toolboxBlock;
     OraculumWorktablesMod.Blocks.MECHANICAL_TOOLBOX = mechanicalToolboxBlock;
 
-    event.register(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("oraculumworktables", ToolboxBlock.NAME),
+    event.register(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(OraculumWorktablesMod.MOD_ID, ToolboxBlock.NAME),
         () -> toolboxBlock);
-    event.register(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("oraculumworktables", ToolboxMechanicalBlock.NAME),
+    event.register(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(OraculumWorktablesMod.MOD_ID, ToolboxMechanicalBlock.NAME),
         () -> mechanicalToolboxBlock);
   }
 
@@ -77,7 +77,7 @@ public class BlockRegistrationEventHandler {
 
   private void register(RegisterEvent event, EnumTier tier, String name, Block block) {
     String registryName = tier.getName() + "_" + name;
-    event.register(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("oraculumworktables", registryName), () -> block);
+    event.register(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(OraculumWorktablesMod.MOD_ID, registryName), () -> block);
     this.registeredWorktables.add(block);
     this.registeredWorktablesByTier.computeIfAbsent(tier, enumTier -> new java.util.ArrayList<>()).add(block);
   }

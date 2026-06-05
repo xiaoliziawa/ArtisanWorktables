@@ -2,6 +2,7 @@ package com.lirxowo.oraculumworktables.common.plugin.kubejs;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
+import com.lirxowo.oraculumworktables.OraculumWorktablesMod;
 import dev.latvian.mods.kubejs.recipe.RecipeJS;
 import dev.latvian.mods.kubejs.recipe.component.RecipeComponent;
 import dev.latvian.mods.kubejs.util.JsonIO;
@@ -15,10 +16,11 @@ public class JsonPassthroughComponent
     implements RecipeComponent<JsonElement> {
 
   public static final JsonPassthroughComponent INSTANCE = new JsonPassthroughComponent();
+  private static final String COMPONENT_TYPE = OraculumWorktablesMod.MOD_ID + ":json";
 
   @Override
   public String componentType() {
-    return "oraculumworktables:json";
+    return COMPONENT_TYPE;
   }
 
   @Override

@@ -47,7 +47,7 @@ public abstract class GuiElementFluidTankBase
   public List<Component> tooltipTextGet(List<Component> list) {
 
     if (this.fluidTank.getFluid() == FluidStack.EMPTY || this.fluidTank.getFluidAmount() == 0) {
-      list.add(Component.translatable("gui.oraculumworktables.tooltip.fluid.empty"));
+      list.add(Component.translatable("gui.oraculum_worktables.tooltip.fluid.empty"));
       list.add(Component.literal(this.fluidTank.getFluidAmount() + " / " + this.fluidTank.getCapacity() + " mB")
           .withStyle(ChatFormatting.GRAY));
 
@@ -57,7 +57,7 @@ public abstract class GuiElementFluidTankBase
       list.add(Component.literal(this.fluidTank.getFluidAmount() + " / " + this.fluidTank.getCapacity() + " mB")
           .withStyle(ChatFormatting.GRAY));
       list.add(Component.translatable(
-          "gui.oraculumworktables.tooltip.fluid.destroy"
+          "gui.oraculum_worktables.tooltip.fluid.destroy"
       ).withStyle(ChatFormatting.DARK_GRAY));
     }
 

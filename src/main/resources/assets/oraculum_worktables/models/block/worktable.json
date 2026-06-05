@@ -2,9 +2,9 @@
   "parent": "block/block",
   "ambientocclusion": false,
   "textures": {
-    "leg": "oraculumworktables:block/worktable_leg",
-    "bottom": "oraculumworktables:block/worktable_bottom",
-    "base": "oraculumworktables:block/worktable_base"
+    "leg": "oraculum_worktables:block/worktable_leg",
+    "bottom": "oraculum_worktables:block/worktable_bottom",
+    "base": "oraculum_worktables:block/worktable_base"
   },
   "elements": [
     {

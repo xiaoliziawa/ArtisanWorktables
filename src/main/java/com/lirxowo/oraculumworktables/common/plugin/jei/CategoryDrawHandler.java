@@ -57,11 +57,11 @@ public class CategoryDrawHandler {
     if (recipe.getExperienceRequired() > 0) {
 
       if (recipe.consumeExperience()) {
-        return I18n.get("jei.oraculumworktables.xp.cost", recipe.getExperienceRequired());
+        return I18n.get("jei.oraculum_worktables.xp.cost", recipe.getExperienceRequired());
 
       } else {
         return I18n.get(
-            "jei.oraculumworktables.xp.required",
+            "jei.oraculum_worktables.xp.required",
             recipe.getExperienceRequired()
         );
       }
@@ -69,10 +69,10 @@ public class CategoryDrawHandler {
     } else if (recipe.getLevelRequired() > 0) {
 
       if (recipe.consumeExperience()) {
-        return I18n.get("jei.oraculumworktables.level.cost", recipe.getLevelRequired());
+        return I18n.get("jei.oraculum_worktables.level.cost", recipe.getLevelRequired());
 
       } else {
-        return I18n.get("jei.oraculumworktables.level.required", recipe.getLevelRequired());
+        return I18n.get("jei.oraculum_worktables.level.required", recipe.getLevelRequired());
       }
     }
 

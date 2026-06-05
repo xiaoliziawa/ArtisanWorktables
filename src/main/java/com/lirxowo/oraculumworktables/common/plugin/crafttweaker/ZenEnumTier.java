@@ -5,7 +5,7 @@ import com.lirxowo.oraculumworktables.common.reference.EnumTier;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.oraculumworktables.Tier")
+@ZenCodeType.Name("mods.oraculum_worktables.Tier")
 public enum ZenEnumTier {
 
   @ZenCodeType.Field

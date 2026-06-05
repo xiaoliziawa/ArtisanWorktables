@@ -7,10 +7,10 @@ import net.minecraft.network.chat.Component;
 
 final class SecondaryIngredientDisplay {
 
-  private static final String TOOLTIP_CONSUMED_KEY = "jei.oraculumworktables.secondary.consumed";
-  private static final String TOOLTIP_NOT_CONSUMED_KEY = "jei.oraculumworktables.secondary.not_consumed";
-  private static final String LABEL_CONSUMED_KEY = "jei.oraculumworktables.secondary.status.consumed";
-  private static final String LABEL_NOT_CONSUMED_KEY = "jei.oraculumworktables.secondary.status.not_consumed";
+  private static final String TOOLTIP_CONSUMED_KEY = "jei.oraculum_worktables.secondary.consumed";
+  private static final String TOOLTIP_NOT_CONSUMED_KEY = "jei.oraculum_worktables.secondary.not_consumed";
+  private static final String LABEL_CONSUMED_KEY = "jei.oraculum_worktables.secondary.status.consumed";
+  private static final String LABEL_NOT_CONSUMED_KEY = "jei.oraculum_worktables.secondary.status.not_consumed";
   private static final int CONSUMED_COLOR = 0xFFFF5555;
   private static final int NOT_CONSUMED_COLOR = 0xFF55FF55;
 

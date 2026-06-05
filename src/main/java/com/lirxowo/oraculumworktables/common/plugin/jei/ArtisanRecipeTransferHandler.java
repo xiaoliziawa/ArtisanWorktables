@@ -123,7 +123,7 @@ public class ArtisanRecipeTransferHandler<C extends BaseContainer>
 
     if (!missingTools.isEmpty()) {
       return this.helper.createUserErrorForMissingSlots(
-          Component.translatable("jei.oraculumworktables.transfer.missing_tool"), missingTools);
+          Component.translatable("jei.oraculum_worktables.transfer.missing_tool"), missingTools);
     }
 
     IRecipeSlotsView effectiveView = replaced

@@ -1,5 +1,6 @@
 package com.lirxowo.oraculumworktables.common.event;
 
+import com.lirxowo.oraculumworktables.OraculumWorktablesMod;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -15,7 +16,7 @@ public class ParticleTypeRegistrationEventHandler {
     }
 
     event.register(Registries.PARTICLE_TYPE,
-        ResourceLocation.fromNamespaceAndPath("oraculumworktables", "mage"),
+        ResourceLocation.fromNamespaceAndPath(OraculumWorktablesMod.MOD_ID, "mage"),
         () -> new SimpleParticleType(false));
   }
 

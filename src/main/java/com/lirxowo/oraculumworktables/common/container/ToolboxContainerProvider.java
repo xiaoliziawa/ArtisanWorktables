@@ -1,5 +1,6 @@
 package com.lirxowo.oraculumworktables.common.container;
 
+import com.lirxowo.oraculumworktables.OraculumWorktablesMod;
 import com.lirxowo.oraculumworktables.common.block.ToolboxBaseBlock;
 import com.lirxowo.oraculumworktables.common.block.ToolboxBlock;
 import com.lirxowo.oraculumworktables.common.block.ToolboxMechanicalBlock;
@@ -32,7 +33,9 @@ public class ToolboxContainerProvider
   @Override
   public Component getDisplayName() {
 
-    return Component.translatable("block.oraculumworktables." + BuiltInRegistries.BLOCK.getKey(this.block).getPath());
+    return Component.translatable(
+        "block." + OraculumWorktablesMod.MOD_ID + "." + BuiltInRegistries.BLOCK.getKey(this.block).getPath()
+    );
   }
 
   @Override

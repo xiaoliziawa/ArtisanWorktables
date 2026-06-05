@@ -1,5 +1,6 @@
 package com.lirxowo.oraculumworktables.common.event;
 
+import com.lirxowo.oraculumworktables.OraculumWorktablesMod;
 import com.lirxowo.oraculumworktables.common.container.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
@@ -20,7 +21,7 @@ public class MenuTypeRegistrationEventHandler {
     }
 
     event.register(Registries.MENU,
-        ResourceLocation.fromNamespaceAndPath("oraculumworktables", WorktableContainer.NAME),
+        ResourceLocation.fromNamespaceAndPath(OraculumWorktablesMod.MOD_ID, WorktableContainer.NAME),
         () -> IForgeMenuType.create((id, playerInventory, data) -> {
           BlockPos blockPos = data.readBlockPos();
           Player player = playerInventory.player;
@@ -29,7 +30,7 @@ public class MenuTypeRegistrationEventHandler {
         }));
 
     event.register(Registries.MENU,
-        ResourceLocation.fromNamespaceAndPath("oraculumworktables", WorkstationContainer.NAME),
+        ResourceLocation.fromNamespaceAndPath(OraculumWorktablesMod.MOD_ID, WorkstationContainer.NAME),
         () -> IForgeMenuType.create((id, playerInventory, data) -> {
           BlockPos blockPos = data.readBlockPos();
           Player player = playerInventory.player;
@@ -38,7 +39,7 @@ public class MenuTypeRegistrationEventHandler {
         }));
 
     event.register(Registries.MENU,
-        ResourceLocation.fromNamespaceAndPath("oraculumworktables", WorkshopContainer.NAME),
+        ResourceLocation.fromNamespaceAndPath(OraculumWorktablesMod.MOD_ID, WorkshopContainer.NAME),
         () -> IForgeMenuType.create((id, playerInventory, data) -> {
           BlockPos blockPos = data.readBlockPos();
           Player player = playerInventory.player;
@@ -47,7 +48,7 @@ public class MenuTypeRegistrationEventHandler {
         }));
 
     event.register(Registries.MENU,
-        ResourceLocation.fromNamespaceAndPath("oraculumworktables", ToolboxContainer.NAME),
+        ResourceLocation.fromNamespaceAndPath(OraculumWorktablesMod.MOD_ID, ToolboxContainer.NAME),
         () -> IForgeMenuType.create((id, playerInventory, data) -> {
           BlockPos blockPos = data.readBlockPos();
           Player player = playerInventory.player;
@@ -56,7 +57,7 @@ public class MenuTypeRegistrationEventHandler {
         }));
 
     event.register(Registries.MENU,
-        ResourceLocation.fromNamespaceAndPath("oraculumworktables", ToolboxMechanicalContainer.NAME),
+        ResourceLocation.fromNamespaceAndPath(OraculumWorktablesMod.MOD_ID, ToolboxMechanicalContainer.NAME),
         () -> IForgeMenuType.create((id, playerInventory, data) -> {
           BlockPos blockPos = data.readBlockPos();
           Player player = playerInventory.player;

@@ -7,7 +7,7 @@ import java.util.List;
 
 public final class Reference {
 
-  public static final String MOD_ID = "oraculumworktables";
+  public static final String MOD_ID = "oraculum_worktables";
 
   public static final int MAX_RECIPE_WIDTH = 5;
   public static final int MAX_RECIPE_HEIGHT = 5;
