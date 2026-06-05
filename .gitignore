@@ -27,11 +27,11 @@ run
 /run/*
 !/run/scripts/
 /run/scripts/*
-!/run/scripts/artisanworktables_examples.zs
-!/run/scripts/artisanworktables_examples_en.zs
+!/run/scripts/oraculumworktables_examples.zs
+!/run/scripts/oraculumworktables_examples_en.zs
 !/run/kubejs/
 /run/kubejs/*
 !/run/kubejs/server_scripts/
 /run/kubejs/server_scripts/*
-!/run/kubejs/server_scripts/artisanworktables_examples.js
-!/run/kubejs/server_scripts/artisanworktables_examples_en.js
+!/run/kubejs/server_scripts/oraculumworktables_examples.js
+!/run/kubejs/server_scripts/oraculumworktables_examples_en.js

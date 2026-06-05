@@ -1,1 +1,1 @@
-com.lirxowo.artisanworktables.common.plugin.kubejs.ArtisanWorktablesKubePlugin
+com.lirxowo.oraculumworktables.common.plugin.kubejs.OraculumWorktablesKubePlugin
