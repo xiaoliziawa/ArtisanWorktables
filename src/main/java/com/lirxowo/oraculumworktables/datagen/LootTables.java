@@ -19,6 +19,8 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
@@ -39,30 +41,28 @@ public class LootTables
   @Override
   public CompletableFuture<?> run(@Nonnull CachedOutput cache) {
 
-    return CompletableFuture.runAsync(() -> {
-      for (Block block : OraculumWorktablesMod.getProxy().getRegisteredWorktables()) {
-        ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(block);
-        String resourceLocationPath = Objects.requireNonNull(resourceLocation).getPath();
-        this.createAndSaveTable(cache, block, resourceLocationPath);
-      }
-    });
+    List<CompletableFuture<?>> futures = new ArrayList<>();
 
-//    this.createAndSaveTable(cache, OraculumWorktablesMod.Blocks.TOOLBOX, ToolboxBlock.NAME);
-//    this.createAndSaveTable(cache, OraculumWorktablesMod.Blocks.MECHANICAL_TOOLBOX, ToolboxMechanicalBlock.NAME);
+    for (Block block : OraculumWorktablesMod.getProxy().getRegisteredWorktables()) {
+      ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(block);
+      String resourceLocationPath = Objects.requireNonNull(resourceLocation).getPath();
+      futures.add(this.createAndSaveTable(cache, block, resourceLocationPath));
+    }
+
+    return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
   }
 
-  private void createAndSaveTable(@Nonnull CachedOutput cache, Block block, String resourceLocationPath) {
+  private CompletableFuture<?> createAndSaveTable(@Nonnull CachedOutput cache, Block block, String resourceLocationPath) {
 
     LootTable.Builder lootTableBuilder = this.createTable(resourceLocationPath, block);
     LootTable lootTable = lootTableBuilder.setParamSet(LootContextParamSets.BLOCK).build();
     Path path = this.output.getOutputFolder().resolve("data/" + OraculumWorktablesMod.MOD_ID + "/loot_tables/blocks/" + resourceLocationPath + ".json");
 
-    try {
-      DataProvider.saveStable(cache, LootDataType.TABLE.parser().toJsonTree(lootTable), path);
-
-    } catch (Exception e) {
-      this.logger.error("Couldn't write loot table ", path, e);
-    }
+    return DataProvider.saveStable(cache, LootDataType.TABLE.parser().toJsonTree(lootTable), path)
+        .exceptionally(e -> {
+          this.logger.error("Couldn't write loot table {}", path, e);
+          return null;
+        });
   }
 
   private LootTable.Builder createTable(String name, Block block) {
