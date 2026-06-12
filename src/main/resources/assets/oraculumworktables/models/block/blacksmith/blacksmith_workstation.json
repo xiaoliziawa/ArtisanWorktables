@@ -1,0 +1,100 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"render_type": "minecraft:cutout",
+	"ambientocclusion": false,
+	"textures": {
+		"4": "oraculumworktables:block/blacksmith/stuff",
+		"particle": "oraculumworktables:block/blacksmith/stuff",
+		"bottom": "oraculumworktables:block/workstation_bottom",
+		"base": "oraculumworktables:block/workstation_base",
+		"side": "oraculumworktables:block/blacksmith/blacksmith_side",
+		"top": "oraculumworktables:block/blacksmith/blacksmith_top"
+	},
+	"elements": [
+		{
+			"from": [1, 0, 1],
+			"to": [15, 4, 15],
+			"faces": {
+				"north": {"uv": [1, 12, 15, 16], "texture": "#base"},
+				"east": {"uv": [1, 12, 15, 16], "texture": "#base"},
+				"south": {"uv": [1, 12, 15, 16], "texture": "#base"},
+				"west": {"uv": [1, 12, 15, 16], "texture": "#base"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#bottom"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#bottom"}
+			}
+		},
+		{
+			"from": [3, 4, 3],
+			"to": [13, 8, 13],
+			"faces": {
+				"north": {"uv": [3, 8, 13, 12], "texture": "#base"},
+				"east": {"uv": [3, 8, 13, 12], "texture": "#base"},
+				"south": {"uv": [3, 8, 13, 12], "texture": "#base"},
+				"west": {"uv": [3, 8, 13, 12], "texture": "#base"}
+			}
+		},
+		{
+			"from": [1, 7, 1],
+			"to": [15, 9, 15],
+			"faces": {
+				"north": {"uv": [1, 15, 15, 16], "texture": "#bottom"},
+				"east": {"uv": [1, 15, 15, 16], "texture": "#bottom"},
+				"south": {"uv": [1, 15, 15, 16], "texture": "#bottom"},
+				"west": {"uv": [1, 15, 15, 16], "texture": "#bottom"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#bottom"}
+			}
+		},
+		{
+			"from": [0, 8, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 8], "texture": "#side"},
+				"east": {"uv": [0, 0, 16, 8], "texture": "#side"},
+				"south": {"uv": [0, 0, 16, 8], "texture": "#side"},
+				"west": {"uv": [0, 0, 16, 8], "texture": "#side"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#top"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#bottom"}
+			}
+		},
+		{
+			"from": [4, 16, 7],
+			"to": [9, 18, 10],
+			"rotation": {"angle": -45, "axis": "y", "origin": [6.5, 17, 9.75]},
+			"faces": {
+				"north": {"uv": [5, 0, 10, 2], "texture": "#4"},
+				"east": {"uv": [2, 6, 5, 8], "texture": "#4"},
+				"south": {"uv": [5, 2, 10, 4], "texture": "#4"},
+				"west": {"uv": [5, 6, 8, 8], "texture": "#4"},
+				"up": {"uv": [5, 3, 0, 0], "texture": "#4"},
+				"down": {"uv": [5, 3, 0, 6], "texture": "#4"}
+			}
+		},
+		{
+			"from": [6, 16.5, 6],
+			"to": [7, 17.5, 15],
+			"rotation": {"angle": -45, "axis": "y", "origin": [6.5, 17, 9.75]},
+			"faces": {
+				"north": {"uv": [2, 8, 3, 9], "texture": "#4"},
+				"east": {"uv": [5, 4, 14, 5], "texture": "#4"},
+				"south": {"uv": [3, 8, 4, 9], "texture": "#4"},
+				"west": {"uv": [5, 5, 14, 6], "texture": "#4"},
+				"up": {"uv": [1, 15, 0, 6], "texture": "#4"},
+				"down": {"uv": [2, 6, 1, 15], "texture": "#4"}
+			}
+		}
+	],
+	"groups": [
+		0,
+		1,
+		2,
+		{
+			"name": "group",
+			"origin": [0, 0, 0],
+			"scope": 0,
+			"color": 0,
+			"children": [3, {"name": "group", "origin": [5, 16, 7], "scope": 0, "color": 0, "children": [4, 5]}]
+		}
+	]
+}

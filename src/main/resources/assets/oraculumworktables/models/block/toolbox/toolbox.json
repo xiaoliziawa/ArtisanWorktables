@@ -1,0 +1,23 @@
+{
+	"parent": "block/block",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"horizontal": "oraculumworktables:block/toolbox/toolbox",
+		"vertical": "oraculumworktables:block/toolbox/toolbox_top",
+		"particle": "oraculumworktables:block/toolbox/toolbox"
+	},
+	"elements": [
+		{
+			"from": [1, 0, 1],
+			"to": [15, 14, 15],
+			"faces": {
+				"north": {"texture": "#horizontal", "uv": [1, 2, 15, 16]},
+				"east": {"texture": "#horizontal", "uv": [1, 2, 15, 16]},
+				"south": {"texture": "#horizontal", "uv": [1, 2, 15, 16]},
+				"west": {"texture": "#horizontal", "uv": [1, 2, 15, 16]},
+				"up": {"texture": "#vertical", "uv": [1, 1, 15, 15]},
+				"down": {"texture": "#vertical", "uv": [1, 1, 15, 15]}
+			}
+		}
+	]
+}

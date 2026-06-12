@@ -1,0 +1,25 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"particle": "oraculumworktables:block/mechanical_toolbox/mechanical_toolbox",
+		"horizontal": "oraculumworktables:block/mechanical_toolbox/mechanical_toolbox",
+		"vertical": "oraculumworktables:block/mechanical_toolbox/mechanical_toolbox_top"
+	},
+	"elements": [
+		{
+			"from": [1, 0, 1],
+			"to": [15, 14, 15],
+			"faces": {
+				"north": {"uv": [1, 2, 15, 16], "texture": "#horizontal"},
+				"east": {"uv": [1, 2, 15, 16], "texture": "#horizontal"},
+				"south": {"uv": [1, 2, 15, 16], "texture": "#horizontal"},
+				"west": {"uv": [1, 2, 15, 16], "texture": "#horizontal"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#vertical"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#vertical"}
+			}
+		}
+	]
+}
